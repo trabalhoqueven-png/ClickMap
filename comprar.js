@@ -11,9 +11,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCai7P5axNyYt2g9x9wqsU7DaA_tNZ3Pnc",
-  authDomain: "casa-d5eae.appspot.com",
-  projectId: "casa-d5eae"
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_DOMINIO",
+  projectId: "SEU_PROJECT_ID"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -30,27 +30,21 @@ onAuthStateChanged(auth, user => {
 window.comprar = async function(qtd) {
   if (!usuarioAtual) return;
 
-  // 🔹 SOMENTE PLANO DE 9,90
-  if (qtd === 5) {
+  const confirmar = confirm(
+    `Confirma compra de ${qtd} créditos?\n\nPIX será exibido em seguida.`
+  );
 
-    const confirmar = confirm(
-      "Você será redirecionado para o pagamento via PIX (R$ 9,90).\n\nApós o pagamento, seus créditos serão liberados."
-    );
+  if (!confirmar) return;
 
-    if (!confirmar) return;
+  // 🔴 AQUI entra o PIX (manual no início)
+  alert("📲 Faça o PIX e aguarde a liberação.");
 
-    // 🔗 LINK MERCADO PAGO
-    window.open(
-      "https://mpago.la/12KQxs2",
-      "_blank"
-    );
+  // 🔥 SIMULA LIBERAÇÃO (remova quando automatizar)
+  await updateDoc(
+    doc(db, "usuarios", usuarioAtual.uid),
+    { credito: increment(qtd) }
+  );
 
-    document.getElementById("msg").innerText =
-      "⏳ Após o pagamento, aguarde a liberação dos 5 créditos.";
-
-    return;
-  }
-
-  // 🔒 OUTROS PLANOS BLOQUEADOS (por enquanto)
-  alert("🚧 Este plano ainda não está disponível.");
+  document.getElementById("msg").innerText =
+    `✅ ${qtd} créditos adicionados com sucesso!`;
 };
