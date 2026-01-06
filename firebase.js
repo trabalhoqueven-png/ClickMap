@@ -4,7 +4,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebas
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAcA7OgB2HYUFKYb7hthdGS86kLMn1ASBY",
+  apiKey: "AIzaSyD8ILwsMa73OM3WCOcV_US9NGT3PVy5nHQ",
   authDomain: "clickmap-483501.firebaseapp.com",
   projectId: "clickmap-483501",
   storageBucket: "clickmap-483501.firebasestorage.app",
@@ -17,3 +17,4 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 export const storage = getStorage(app);
+
