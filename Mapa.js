@@ -17,9 +17,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCai7P5axNyYt2g9x9wqsU7DaA_tNZ3Pnc",
-  authDomain: "casa-d5eae.appspot.com",
-  projectId: "casa-d5eae"
+  apiKey: "AIzaSyAcA7OgB2HYUFKYb7hthdGS86kLMn1ASBY",
+  authDomain: "clickmap-483501.firebaseapp.com",
+  databaseURL: "https://clickmap-483501-default-rtdb.firebaseio.com",
+  projectId: "clickmap-483501",
+  storageBucket: "clickmap-483501.firebasestorage.app",
+  messagingSenderId: "879441067528",
+  appId: "1:879441067528:web:426f7fe43a0464acd59bbd"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -316,4 +320,5 @@ window.sair = async function () {
 
   // força reload REAL
   window.location.replace("index.html");
+
 };
