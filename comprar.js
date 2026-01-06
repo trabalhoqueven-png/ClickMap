@@ -13,7 +13,7 @@ import {
 const firebaseConfig = { 
   apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
   authDomain: "clickmap-ae0ca.firebaseapp.com,
-  projectId: "clickmap-ae0ca
+  projectId: "clickmap-ae0ca"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -48,5 +48,6 @@ window.comprar = async function(qtd) {
   document.getElementById("msg").innerText =
     `✅ ${qtd} créditos adicionados com sucesso!`;
 };
+
 
 
