@@ -4,12 +4,12 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebas
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD8ILwsMa73OM3WCOcV_US9NGT3PVy5nHQ",
-  authDomain: "clickmap-483501.firebaseapp.com",
-  projectId: "clickmap-483501",
-  storageBucket: "clickmap-483501.firebasestorage.app",
-  messagingSenderId: "879441067528",
-  appId: "1:879441067528:web:426f7fe43a0464acd59bbd"
+  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
+  authDomain: "clickmap-ae0ca.firebaseapp.com",
+  projectId: "clickmap-ae0ca",
+  storageBucket: "clickmap-ae0ca.firebasestorage.app",
+  messagingSenderId: "388461628722",
+  appId: "1:388461628722:web:425b5089c36a819d625b2b"
 };
 
 export const app = initializeApp(firebaseConfig);
@@ -17,4 +17,5 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 export const storage = getStorage(app);
+
 
