@@ -26,9 +26,8 @@ body.inicio {
 
 /* CAIXA LOGIN */
 .login-box {
-  
-  width: 850px;
-  padding: 100px;
+  width: 340px;
+  padding: 32px;
   text-align: center;
 
   background: linear-gradient(
@@ -82,7 +81,7 @@ body.inicio {
 /* TÍTULO */
 .login-box h2 {
   color: #ff4d4d;
-  margin-bottom: 100px;
+  margin-bottom: 24px;
   font-weight: 600;
   letter-spacing: 1px;
 }
@@ -90,7 +89,7 @@ body.inicio {
 /* INPUTS */
 .input-box {
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 16px;
 }
 
 .input-box input {
@@ -131,7 +130,7 @@ body.inicio {
 .btn {
   width: 100%;
   padding: 14px;
-  margin-top: 50px;
+  margin-top: 12px;
 
   border-radius: 12px;
   font-size: 15px;
@@ -143,7 +142,6 @@ body.inicio {
 
 /* LOGIN */
 .btn.login {
-  
   background: linear-gradient(135deg, #ff4d4d, #7a0000);
   color: #fff;
   border: none;
@@ -171,7 +169,7 @@ body.inicio {
 
 /* CONTATO */
 .contato {
-  margin-top: 150px;
+  margin-top: 24px;
 }
 
 .contato p {

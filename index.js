@@ -1,21 +1,28 @@
-import { auth, db } from "./firebase.js";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { auth, app } from "./firebase.js";
 
 import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore,
   doc,
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-window.login = async () => {
-  try {
-    await signInWithEmailAndPassword(auth, email.value, senha.value);
-    location.href = "Mapa.html";
-  } catch {
-    msg.innerText = "❌ Login inválido";
-  }
+const db = getFirestore(app);
+
+window.login = () => {
+  signInWithEmailAndPassword(auth, email.value, senha.value)
+    .then(() => {
+      document.body.classList.add("saindo");
+
+      setTimeout(() => {
+        location.href = "Mapa.html";
+      }, 600);
+    })
+    .catch(() => msg("Email ou senha inválidos", "red"));
 };
 
 window.cadastrar = async () => {
@@ -26,14 +33,28 @@ window.cadastrar = async () => {
       senha.value
     );
 
+    // 🔥 cria usuário com crédito inicial
     await setDoc(doc(db, "usuarios", cred.user.uid), {
       email: cred.user.email,
       credito: 1,
       criadoEm: new Date()
     });
+    msg("Cadastro criado com R$ 1 de crédito!", "green");
 
-    msg.innerText = "✅ Conta criada com 1 crédito!";
   } catch (e) {
-    msg.innerText = e.message;
+    msg(e.message, "red");
   }
 };
+
+
+onAuthStateChanged(auth, user => {
+  if (user && location.pathname.includes("index.html")) {
+    location.href = "Mapa.html";
+  }
+});
+
+function msg(t, c) {
+  const m = document.getElementById("msg");
+  m.innerText = t;
+  m.style.color = c;
+}

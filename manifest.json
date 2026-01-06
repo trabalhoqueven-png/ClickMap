@@ -1,8 +1,7 @@
 {
   "name": "QMobile - Mapa de Casas",
   "short_name": "QMobile",
-  "scope": "/Q-Mobile/",
-  "start_url": "/Q-Mobile/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#b30000",

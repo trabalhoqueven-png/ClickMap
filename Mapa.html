@@ -1,15 +1,80 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa</title>
+  <title>Mapa de Casas</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#b30000">
+  <link rel="stylesheet" href="stylesmapa.css">
+
 </head>
+
 <body>
 
-<h2 id="credito">Créditos: ...</h2>
+  <div class="painel">
+  <p class="credito-box">💰 Crédito: <span id="creditoValor">0</span></p>
+  <div class="credito-box">
+  <button id="btnCredito">➕ Adicionar crédito</button>
+</div>
+  <p>Buscar Cidade / Bairro</p>
+  <div class="input-box">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input id="buscar" placeholder="Buscar bairro ou cidade">
+</div>
 
-<button onclick="logout()">Sair</button>
+<button id="btnBuscar">Buscar</button>
+
+  <p>Cadastrar Casa / clique no Mapa</p>
+
+<div class="input-box">
+  <i class="fa-solid fa-house"></i>
+  <input id="titulo" placeholder="Título">
+</div>
+
+<div class="input-box">
+  <i class="fa-solid fa-tag"></i>
+  <input id="preco" placeholder="Preço">
+</div>
+
+<div class="input-box">
+  <i class="fa-solid fa-pen"></i>
+  <textarea id="descricao" placeholder="Descrição"></textarea>
+</div>
+<DIV class="fotoinfo">
+  TAMANHO MAXIMO DA FOTO 400 KB !! Sé Nao da Erro.. 
+</DIV>
+
+<input type="file" id="foto">
+
+<div class="infofoto">
+  TORNAR FOTO PUBLICA? 
+</div>
+
+<label>
+  <input id="publico"  type="checkbox" >
+</label>
+
+<button id="salvar">Salvar</button>
+ 
+</div>
+
+    
+ 
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script type="module" src="Mapa.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js')
+    .then(() => console.log('SW registrado'))
+    .catch(err => console.error('SW erro', err));
+}
+</script>
+
+
 </body>
 </html>
