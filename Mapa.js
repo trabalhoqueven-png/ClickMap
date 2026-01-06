@@ -16,16 +16,6 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAcA7OgB2HYUFKYb7hthdGS86kLMn1ASBY",
-  authDomain: "clickmap-483501.firebaseapp.com",
-  databaseURL: "https://clickmap-483501-default-rtdb.firebaseio.com",
-  projectId: "clickmap-483501",
-  storageBucket: "clickmap-483501.firebasestorage.app",
-  messagingSenderId: "879441067528",
-  appId: "1:879441067528:web:426f7fe43a0464acd59bbd"
-};
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -322,3 +312,4 @@ window.sair = async function () {
   window.location.replace("index.html");
 
 };
+
