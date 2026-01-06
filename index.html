@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head> 
+  <meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#b30000">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body class="inicio">
+
+<div class="login-box">
+  <h2>Entrar Na Plataforma</h2>
+
+  <div class="input-box">
+  <i class="fa-solid fa-envelope"></i>
+  <input id="email" type="email" placeholder="Email">
+</div>
+
+<div class="input-box">
+  <i class="fa-solid fa-lock"></i>
+  <input id="senha" type="password" placeholder="Senha">
+
+</div>
+
+  <button class="btn login" type="button" onclick="login()">Login</button>
+  <button class="btn cadastro" type="button" onclick="cadastrar()">Cadastrar</button>
+  <p id="msg"></p>
+  
+<!-- CONTATO -->
+    <div class="contato">
+      <p>Contato</p>
+
+      <a href="https://wa.me/5564974008793" target="_blank" class="btn-contato whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+
+      <a href="https://www.instagram.com/queven_reis"target="_blank" class="btn-contato instagram">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+      <p id="ifo">PRDC - QMobile</p>
+    </div>
+
+</div>
+
+<script type="module" src="index.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("PWA pronto!"))
+    .catch(err => console.error("Erro PWA:", err));
+}
+
+</script>
+</body>
+</html>
+
