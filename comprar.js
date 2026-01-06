@@ -10,10 +10,10 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_DOMINIO",
-  projectId: "SEU_PROJECT_ID"
+const firebaseConfig = { 
+  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
+  authDomain: "clickmap-ae0ca.firebaseapp.com,
+  projectId: "clickmap-ae0ca"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -48,3 +48,4 @@ window.comprar = async function(qtd) {
   document.getElementById("msg").innerText =
     `✅ ${qtd} créditos adicionados com sucesso!`;
 };
+
