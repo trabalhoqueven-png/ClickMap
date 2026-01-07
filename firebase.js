@@ -9,10 +9,11 @@ const firebaseConfig = {
   projectId: "clickmap-ae0ca",
   storageBucket: "clickmap-ae0ca.firebasestorage.app",
   messagingSenderId: "388461628722",
-  appId: "1:388461628722:web:425b5089c36a819d625b2b",
+  appId: "1:388461628722:web:425b5089c36a819d625b2b"
 };
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
 export const storage = getStorage(app);
