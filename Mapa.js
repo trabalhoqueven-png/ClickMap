@@ -21,10 +21,6 @@ const firebaseConfig = {
   projectId: "clickmap-ae0ca"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
 let usuarioAtual = null;
 let coordenadas = null;
 let creditoUsuario = 0; // 🔥 AGORA EXISTE
@@ -306,3 +302,4 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
+
