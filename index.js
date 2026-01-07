@@ -1,4 +1,4 @@
-import { auth, app } from "./firebase.js";
+import { auth, db, app } from "./firebase.js";
 
 import {
   createUserWithEmailAndPassword,
@@ -57,6 +57,7 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
