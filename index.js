@@ -1,4 +1,4 @@
-import { auth, db, app } from "./firebase.js";
+import { auth, app } from "./firebase.js";
 
 import {
   createUserWithEmailAndPassword,
@@ -11,9 +11,6 @@ import {
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
 
 window.login = () => {
   signInWithEmailAndPassword(auth, email.value, senha.value)
@@ -60,5 +57,6 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
