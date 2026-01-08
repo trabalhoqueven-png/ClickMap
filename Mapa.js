@@ -306,16 +306,20 @@ map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
 window.sair = async function () {
-  const confirmar = confirm("Deseja realmente sair?");
-  if (!confirmar) return;
-
   await signOut(auth);
 
+  // limpa tudo
   localStorage.clear();
   sessionStorage.clear();
 
-  window.location.replace("index.html");
+  // trava histórico
+  window.location.href = "index.html";
+  window.history.pushState(null, "", "index.html");
+  window.onpopstate = function () {
+    window.location.href = "index.html";
+  };
 };
+
 
 
 
