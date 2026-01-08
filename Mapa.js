@@ -319,11 +319,9 @@ window.sair = async function () {
 
   // trava histórico
   window.location.href = "index.html";
-  window.history.pushState(null, "", "index.html");
-  window.onpopstate = function () {
-    window.location.href = "index.html";
   };
 };
+
 
 
 
