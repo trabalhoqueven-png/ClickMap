@@ -12,8 +12,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
-  onAuthStateChanged,
-  singOut
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -45,7 +44,6 @@ onAuthStateChanged(auth, async user => {
 
     await carregarCredito(); // 🔥 AGUARDA
     carregarCasas();
-    
   }
 });
 
@@ -307,16 +305,6 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
