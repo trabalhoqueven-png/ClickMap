@@ -35,11 +35,6 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
-onAuthStateChanged(auth, user => {
-  if (!user) {
-    window.location.replace("index.html");
-  }
-});
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -49,6 +44,7 @@ onAuthStateChanged(auth, async user => {
 
     await carregarCredito(); // 🔥 AGUARDA
     carregarCasas();
+    window.location.replace("index.html");
   }
 });
 
@@ -321,6 +317,7 @@ window.sair = async function () {
   window.location.href = "index.html";
   };
 };
+
 
 
 
