@@ -12,7 +12,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
-  onAuthStateChanged
+  onAuthStateChanged,
+  singOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -320,6 +321,7 @@ window.sair = async function () {
     window.location.href = "index.html";
   };
 };
+
 
 
 
