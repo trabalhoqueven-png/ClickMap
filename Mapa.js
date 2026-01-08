@@ -34,7 +34,17 @@ function getUltimaPosicao() {
   if (!salvo) return null;
   return JSON.parse(salvo);
 }
+window.sair = async function () {
+  const confirmar = confirm("Deseja realmente sair?");
+  if (!confirmar) return;
 
+  await signOut(auth);
+
+  localStorage.clear();
+  sessionStorage.clear();
+
+  window.location.replace("index.html");
+};
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -306,5 +316,6 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
+
 
 
