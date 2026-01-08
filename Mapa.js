@@ -36,6 +36,22 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
+window.sair = async function () {
+  await signOut(auth);
+
+  // limpa tudo
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // trava histórico
+  window.location.href = "index.html";
+  window.history.pushState(null, "", "index.html");
+  window.onpopstate = function () {
+    window.location.href = "index.html";
+  };
+};
+
+
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -307,14 +323,6 @@ map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
 
-window.sair = async function () {
-  await signOut(auth);
-
-  localStorage.clear();
-  sessionStorage.clear();
-
-  window.location.replace("index.html");
-};
 
 
 
