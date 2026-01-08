@@ -36,20 +36,6 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
-window.sair = async function () {
-  await signOut(auth);
-
-  // limpa tudo
-  localStorage.clear();
-  sessionStorage.clear();
-
-  // trava histórico
-  window.location.href = "index.html";
-  window.history.pushState(null, "", "index.html");
-  window.onpopstate = function () {
-    window.location.href = "index.html";
-  };
-};
 
 
 // 🔐 Login + crédito
@@ -63,6 +49,19 @@ onAuthStateChanged(auth, async user => {
     carregarCasas();
   }
 });
+//SAIR
+window.sair = async () => {
+  try {
+    await signOut(auth);
+
+    localStorage.clear();
+    sessionStorage.clear();
+
+    window.location.replace("index.html");
+  } catch (e) {
+    console.error("Erro ao sair:", e);
+  }
+};
 
 // 💰 buscar crédito
 async function carregarCredito() {
@@ -322,6 +321,7 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
+
 
 
 
