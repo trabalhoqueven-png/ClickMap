@@ -306,17 +306,6 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
-window.sair = async function () {
-  const confirmar = confirm("Deseja realmente sair?");
-  if (!confirmar) return;
-
-  await signOut(auth);
-
-  localStorage.clear();
-  sessionStorage.clear();
-
-  window.location.replace("index.html");
-};
 
 
 
