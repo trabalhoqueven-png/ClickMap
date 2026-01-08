@@ -281,7 +281,6 @@ async function buscarLocal() {
   }
 }
 
-
 document.getElementById("btnBuscar")
   .addEventListener("click", buscarLocal);
 
