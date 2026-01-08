@@ -310,17 +310,12 @@ map.whenReady(() => {
 window.sair = async function () {
   await signOut(auth);
 
-  // limpa tudo
   localStorage.clear();
   sessionStorage.clear();
 
-  // trava histórico
-  window.location.href = "index.html";
-  window.history.pushState(null, "", "index.html");
-  window.onpopstate = function () {
-    window.location.href = "index.html";
-  };
+  window.location.replace("index.html");
 };
+
 
 
 
