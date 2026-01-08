@@ -35,6 +35,11 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    window.location.replace("index.html");
+  }
+});
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -319,6 +324,7 @@ window.sair = async function () {
     window.location.href = "index.html";
   };
 };
+
 
 
 
