@@ -12,13 +12,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-  history.go(1);
-};
 
 const firebaseConfig = {
   apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
@@ -40,8 +36,10 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
-
-
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+  history.go(1);
+};
 
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
@@ -327,6 +325,7 @@ window.Voltar = async function () {
     alert("Erro ao sair");
   }
 };
+
 
 
 
