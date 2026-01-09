@@ -15,6 +15,11 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+  history.go(1);
+};
+
 const firebaseConfig = {
   apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
   authDomain: "clickmap-ae0ca.firebaseapp.com",
@@ -307,6 +312,21 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
+window.Voltar = async function () {
+  try {
+    await signOut(auth);
+
+    // limpa tudo
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // impede voltar
+    window.location.replace("index.html");
+  } catch (e) {
+    console.error("Erro ao sair:", e);
+    alert("Erro ao sair");
+  }
+};
 
 
 
