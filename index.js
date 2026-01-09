@@ -44,17 +44,13 @@ window.cadastrar = async () => {
     msg(e.message, "red");
   }
 };
-onAuthStateChanged(auth, user => {
-  if (user && location.pathname.includes("index.html")) {
-    location.href = "index.html";
-  }
-});
 
 function msg(t, c) {
   const m = document.getElementById("msg");
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
