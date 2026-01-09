@@ -13,9 +13,9 @@
 .credito-box {
   background: linear-gradient(135deg, #0e0909, #b30000);
   color: #ffffff;
-
+  gap: 20px;
   padding: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 14px;
 
   text-align: center;
   font-weight: bold;
@@ -194,4 +194,5 @@ body {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
   opacity: 0.95;
 }
+
 
