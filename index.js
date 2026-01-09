@@ -32,31 +32,18 @@ window.cadastrar = async () => {
       senha.value
     );
 
-    // 🔥 GARANTE criação do documento
-    await setDoc(
-      doc(db, "usuarios", cred.user.uid),
-      {
-        email: cred.user.email,
-        credito: 1, // 🎁 crédito inicial
-        criadoEm: serverTimestamp()
-      },
-      { merge: true } // 🚨 MUITO IMPORTANTE
-    );
-
-    alert("✅ Cadastro criado com 1 crédito!");
-
-    // 🔒 espera e redireciona
-    setTimeout(() => {
-      window.location.replace("Mapa.html");
-    }, 300);
+    // 🔥 cria usuário com crédito inicial
+    await setDoc(doc(db, "usuarios", cred.user.uid), {
+      email: cred.user.email,
+      credito: 1,
+      criadoEm: new Date()
+    });
+    msg("Cadastro criado com R$ 1 de crédito!", "green");
 
   } catch (e) {
-    console.error(e);
-    alert(e.message);
+    msg(e.message, "red");
   }
 };
-
-
 onAuthStateChanged(auth, user => {
   if (user && location.pathname.includes("index.html")) {
     location.href = "Mapa.html";
@@ -68,6 +55,7 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
