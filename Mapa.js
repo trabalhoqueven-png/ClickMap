@@ -41,16 +41,32 @@ async function carregarCredito() {
   const ref = doc(db, "usuarios", usuarioAtual.uid);
   const snap = await getDoc(ref);
 
+  // 🔥 SE NÃO EXISTIR → CRIA AUTOMATICAMENTE
   if (!snap.exists()) {
-    alert("Usuário sem crédito cadastrado!");
-    creditoUsuario = 0;
+    await setDoc(ref, {
+      email: usuarioAtual.email,
+      credito: 1,
+      criadoEm: serverTimestamp()
+    });
+
+    creditoUsuario = 1;
     atualizarCreditoTela();
     return;
   }
 
-  creditoUsuario = snap.data().credito; atualizarCreditoTela();
-  console.log("💰 Crédito atual:", creditoUsuario);
-};
+  const dados = snap.data();
+
+  // 🔥 SE NÃO TIVER CRÉDITO → CORRIGE
+  if (dados.credito === undefined) {
+    await updateDoc(ref, { credito: 1 });
+    creditoUsuario = 1;
+  } else {
+    creditoUsuario = dados.credito;
+  }
+
+  atualizarCreditoTela();
+}
+
 
 function atualizarCreditoTela() {
   const el = document.getElementById("creditoValor");
@@ -309,6 +325,7 @@ window.sair = async function () {
     alert("Erro ao sair");
   }
 };
+
 
 
 
