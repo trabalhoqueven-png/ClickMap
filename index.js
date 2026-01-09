@@ -13,32 +13,16 @@ import {
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-window.login = async () => {
-  try {
-    const cred = await signInWithEmailAndPassword(
-      auth,
-      email.value,
-      senha.value
-    );
+window.login = () => {
+  signInWithEmailAndPassword(auth, email.value, senha.value)
+    .then(() => {
+      document.body.classList.add("saindo");
 
-    if (!cred.user.emailVerified) {
-      await signOut(auth);
-      msg("❌ Confirme seu email antes de entrar.", "red");
-      return;
-    }
-
-    // 🔥 marca como verificado no Firestore
-    await setDoc(
-      doc(db, "usuarios", cred.user.uid),
-      { verificado: true },
-      { merge: true }
-    );
-
-    location.href = "Mapa.html";
-
-  } catch {
-    msg("Email ou senha inválidos", "red");
-  }
+      setTimeout(() => {
+        location.href = "Mapa.html";
+      }, 600);
+    })
+    .catch(() => msg("Email ou senha inválidos", "red"));
 };
 
 window.cadastrar = async () => {
@@ -49,26 +33,32 @@ window.cadastrar = async () => {
       senha.value
     );
 
-    // 📧 Enviar verificação de email
-    await sendEmailVerification(cred.user);
-
-    // 🔥 Criar usuário no Firestore
+    // 🔥 cria usuário com crédito inicial
     await setDoc(doc(db, "usuarios", cred.user.uid), {
       email: cred.user.email,
       credito: 1,
-      criadoEm: new Date(),
-      verificado: false
+      criadoEm: new Date()
     });
-
-    msg(
-      "📧 Enviamos um email de verificação. Confirme antes de entrar!",
-      "green"
-    );
+    msg("Cadastro criado com R$ 1 de crédito!", "green");
 
   } catch (e) {
     msg(e.message, "red");
   }
 };
+
+
+onAuthStateChanged(auth, user => {
+  if (user && location.pathname.includes("index.html")) {
+    location.href = "Mapa.html";
+  }
+});
+
+function msg(t, c) {
+  const m = document.getElementById("msg");
+  m.innerText = t;
+  m.style.color = c;
+}
+
 
 
 
