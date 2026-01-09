@@ -22,9 +22,6 @@ const firebaseConfig = {
   projectId: "clickmap-ae0ca"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
 
 let usuarioAtual = null;
 let coordenadas = null;
@@ -321,6 +318,7 @@ window.sair = async function () {
     alert("Erro ao sair");
   }
 };
+
 
 
 
