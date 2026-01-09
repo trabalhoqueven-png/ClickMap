@@ -3,7 +3,8 @@ import { auth, db, app } from "./firebase.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   getFirestore,
@@ -11,17 +12,28 @@ import {
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+window.login = async () => {
+  try {
+    const cred = await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      senha.value
+    );
 
-window.login = () => {
-  signInWithEmailAndPassword(auth, email.value, senha.value)
-    .then(() => {
-      document.body.classList.add("saindo");
+    if (!cred.user.emailVerified) {
+      await signOut(auth);
+      msg(
+        "❌ Confirme seu email antes de entrar.",
+        "red"
+      );
+      return;
+    }
 
-      setTimeout(() => {
-        location.href = "Mapa.html";
-      }, 600);
-    })
-    .catch(() => msg("Email ou senha inválidos", "red"));
+    location.href = "Mapa.html";
+
+  } catch {
+    msg("Email ou senha inválidos", "red");
+  }
 };
 
 window.cadastrar = async () => {
@@ -32,24 +44,26 @@ window.cadastrar = async () => {
       senha.value
     );
 
-    // 🔥 cria usuário com crédito inicial
+    // 📧 Enviar verificação de email
+    await sendEmailVerification(cred.user);
+
+    // 🔥 Criar usuário no Firestore
     await setDoc(doc(db, "usuarios", cred.user.uid), {
       email: cred.user.email,
       credito: 1,
-      criadoEm: new Date()
+      criadoEm: new Date(),
+      verificado: false
     });
-    msg("Cadastro criado com R$ 1 de crédito!", "green");
+
+    msg(
+      "📧 Enviamos um email de verificação. Confirme antes de entrar!",
+      "green"
+    );
 
   } catch (e) {
     msg(e.message, "red");
   }
 };
-
-function msg(t, c) {
-  const m = document.getElementById("msg");
-  m.innerText = t;
-  m.style.color = c;
-}
 
 
 
