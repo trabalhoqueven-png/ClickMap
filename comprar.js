@@ -38,12 +38,13 @@ window.comprar = async function(qtd) {
   const linkPix = "https://mpago.la/12KQxs2";
 
   localStorage.setItem("compra_pendente", qtd);
-  window.location.href = "Mapa.html";
+  window.location.href = "https://mpago.la/12KQxs2";
   );
 
   document.getElementById("msg").innerText =
     `✅ ${qtd} créditos adicionados com sucesso!`;
 };
+
 
 
 
