@@ -310,7 +310,7 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
-window.Voltar = async function () {
+window.sair = async function () {
   try {
     await signOut(auth);
 
@@ -325,6 +325,7 @@ window.Voltar = async function () {
     alert("Erro ao sair");
   }
 };
+
 
 
 
