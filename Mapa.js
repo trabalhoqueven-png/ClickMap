@@ -12,9 +12,18 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
-  onAuthStateChanged,
-  signOut
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
+  authDomain: "clickmap-ae0ca.firebaseapp.com",
+  projectId: "clickmap-ae0ca"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
 let usuarioAtual = null;
 let coordenadas = null;
@@ -25,6 +34,7 @@ function getUltimaPosicao() {
   if (!salvo) return null;
   return JSON.parse(salvo);
 }
+
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -36,37 +46,22 @@ onAuthStateChanged(auth, async user => {
     carregarCasas();
   }
 });
+
 // 💰 buscar crédito
 async function carregarCredito() {
   const ref = doc(db, "usuarios", usuarioAtual.uid);
   const snap = await getDoc(ref);
 
-  // 🔥 SE NÃO EXISTIR → CRIA AUTOMATICAMENTE
   if (!snap.exists()) {
-    await setDoc(ref, {
-      email: usuarioAtual.email,
-      credito: 1,
-      criadoEm: serverTimestamp()
-    });
-
-    creditoUsuario = 1;
+    alert("Usuário sem crédito cadastrado!");
+    creditoUsuario = 0;
     atualizarCreditoTela();
     return;
   }
 
-  const dados = snap.data();
-
-  // 🔥 SE NÃO TIVER CRÉDITO → CORRIGE
-  if (dados.credito === undefined) {
-    await updateDoc(ref, { credito: 1 });
-    creditoUsuario = 1;
-  } else {
-    creditoUsuario = dados.credito;
-  }
-
-  atualizarCreditoTela();
-}
-
+  creditoUsuario = snap.data().credito; atualizarCreditoTela();
+  console.log("💰 Crédito atual:", creditoUsuario);
+};
 
 function atualizarCreditoTela() {
   const el = document.getElementById("creditoValor");
@@ -310,37 +305,6 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
-window.sair = async function () {
-  try {
-    await signOut(auth);
-
-    // limpa tudo
-    localStorage.clear();
-    sessionStorage.clear();
-
-    // impede voltar
-    window.location.replace("index.html");
-  } catch (e) {
-    console.error("Erro ao sair:", e);
-    alert("Erro ao sair");
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
