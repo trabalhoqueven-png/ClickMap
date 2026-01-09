@@ -35,19 +35,16 @@ window.comprar = async function(qtd) {
   );
 
   if (!confirmar) return;
+  const linkPix = "https://mpago.la/12KQxs2";
 
-  // 🔴 AQUI entra o PIX (manual no início)
-  alert("📲 Faça o PIX e aguarde a liberação.");
-
-  // 🔥 SIMULA LIBERAÇÃO (remova quando automatizar)
-  await updateDoc(
-    doc(db, "usuarios", usuarioAtual.uid),
-    { credito: increment(qtd) }
+  localStorage.setItem("compra_pendente", qtd);
+  window.location.href = "Mapa.html";
   );
 
   document.getElementById("msg").innerText =
     `✅ ${qtd} créditos adicionados com sucesso!`;
 };
+
 
 
 
