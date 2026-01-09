@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  sendEmailVerification
+  sendEmailVerification,
+  singOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   getFirestore,
@@ -64,6 +65,7 @@ window.cadastrar = async () => {
     msg(e.message, "red");
   }
 };
+
 
 
 
