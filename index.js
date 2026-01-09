@@ -23,12 +23,16 @@ window.login = async () => {
 
     if (!cred.user.emailVerified) {
       await signOut(auth);
-      msg(
-        "❌ Confirme seu email antes de entrar.",
-        "red"
-      );
+      msg("❌ Confirme seu email antes de entrar.", "red");
       return;
     }
+
+    // 🔥 marca como verificado no Firestore
+    await setDoc(
+      doc(db, "usuarios", cred.user.uid),
+      { verificado: true },
+      { merge: true }
+    );
 
     location.href = "Mapa.html";
 
@@ -65,6 +69,7 @@ window.cadastrar = async () => {
     msg(e.message, "red");
   }
 };
+
 
 
 
