@@ -31,19 +31,19 @@ window.comprar = async function(qtd) {
   if (!usuarioAtual) return;
 
   const confirmar = confirm(
-    `Confirma compra de ${qtd} créditos?\n\nPIX será exibido em seguida.`
+    `Confirma compra de ${qtd} créditos por PIX?`
   );
 
   if (!confirmar) return;
-  const linkPix = "https://mpago.la/12KQxs2";
 
-  localStorage.setItem("compra_pendente", qtd);
-  window.location.href = "https://mpago.la/12KQxs2";
-  );
+  // 🔗 Abre o link do Mercado Pago
+  window.open("https://mpago.la/12KQxs2", "_blank");
 
   document.getElementById("msg").innerText =
-    `✅ ${qtd} créditos adicionados com sucesso!`;
+    "📲 Faça o pagamento via PIX. Após pagar, seus créditos serão liberados.";
 };
+
+
 
 
 
