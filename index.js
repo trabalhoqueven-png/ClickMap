@@ -4,8 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  sendEmailVerification,
-  singOut
+  sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   getFirestore,
@@ -58,6 +57,7 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
