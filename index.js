@@ -46,7 +46,7 @@ window.cadastrar = async () => {
 };
 onAuthStateChanged(auth, user => {
   if (user && location.pathname.includes("index.html")) {
-    location.href = "Mapa.html";
+    location.href = "index.html";
   }
 });
 
@@ -55,6 +55,7 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
