@@ -35,12 +35,6 @@ function getUltimaPosicao() {
   if (!salvo) return null;
   return JSON.parse(salvo);
 }
-
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-  history.go(1);
-};
-
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -325,6 +319,7 @@ window.sair = async function () {
     alert("Erro ao sair");
   }
 };
+
 
 
 
