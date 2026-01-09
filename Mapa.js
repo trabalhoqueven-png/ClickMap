@@ -36,13 +36,35 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
+
+onAuthStateChanged(auth, async user => {
+  if (!user) return;
+
+  if (user.emailVerified) {
+    await updateDoc(
+      doc(db, "usuarios", user.uid),
+      { verificado: true }
+    );
+  }
+});
+
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
-  if (!user) {
-    location.href = "index.html";
-  } else {
-    usuarioAtual = user;
+  if (!user) return;
 
+  if (user.emailVerified) {
+    await updateDoc(
+      doc(db, "usuarios", user.uid),
+      { verificado: true }
+    );
+
+  if (!user) 
+  {
+    location.href = "index.html";
+  } 
+  else 
+  {
+    usuarioAtual = user;
     await carregarCredito(); // 🔥 AGUARDA
     carregarCasas();
   }
@@ -336,6 +358,7 @@ window.sair = async function () {
     alert("Erro ao sair");
   }
 };
+
 
 
 
