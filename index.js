@@ -3,7 +3,8 @@ import { auth, db, app } from "./firebase.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  singOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   getFirestore,
@@ -55,6 +56,7 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
