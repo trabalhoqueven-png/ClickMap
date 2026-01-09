@@ -49,20 +49,6 @@ onAuthStateChanged(auth, async user => {
     carregarCasas();
   }
 });
-//SAIR
-window.sair = async () => {
-  try {
-    await signOut(auth);
-
-    localStorage.clear();
-    sessionStorage.clear();
-
-    window.location.replace("index.html");
-  } catch (e) {
-    console.error("Erro ao sair:", e);
-  }
-};
-
 // 💰 buscar crédito
 async function carregarCredito() {
   const ref = doc(db, "usuarios", usuarioAtual.uid);
@@ -321,6 +307,7 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
+
 
 
 
