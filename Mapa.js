@@ -306,7 +306,7 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
-window.voltar = async function () {
+window.sair = async function () {
   try {
     await signOut(auth);
 
@@ -321,6 +321,7 @@ window.voltar = async function () {
     console.error("Erro ao sair:", e);
   }
 };
+
 
 
 
