@@ -13,7 +13,7 @@ import {
 import {
   getAuth,
   onAuthStateChanged,
-  singOut
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -321,6 +321,7 @@ window.voltar = async function () {
     console.error("Erro ao sair:", e);
   }
 };
+
 
 
 
