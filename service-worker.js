@@ -1,25 +1,27 @@
-const CACHE_NAME = "q-mobile-v2";
+const CACHE_NAME = "clickmap-v1";
 
-// 📦 Arquivos estáticos (SEM JS)
-const STATIC_ASSETS = [
-  "/Q-Mobile/",
-  "/Q-Mobile/index.html",
-  "/Q-Mobile/stylesmapa.css",
-  "/Q-Mobile/Mapa.html"
+const FILES_TO_CACHE = [
+  "/ClickMap/",
+  "/ClickMap/index.html",
+  "/ClickMap/Mapa.html",
+  "/ClickMap/comprar.html",
+  "/ClickMap/styles.css",
+  "/ClickMap/stylesmapa.css",
+  "/ClickMap/Mapa.js",
+  "/ClickMap/index.js",
+  "/ClickMap/comprar.js",
+  "/ClickMap/manifest.json"
 ];
 
-// 🔧 INSTALL
 self.addEventListener("install", event => {
-  self.skipWaiting();
-
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(STATIC_ASSETS);
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
+  self.skipWaiting();
 });
 
-// 🔄 ACTIVATE
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -32,31 +34,11 @@ self.addEventListener("activate", event => {
       )
     )
   );
-
   self.clients.claim();
 });
 
-// 🌐 FETCH
 self.addEventListener("fetch", event => {
-
-  // 🔥 JS SEMPRE DA INTERNET (Firebase depende disso)
-  if (event.request.destination === "script") {
-    event.respondWith(fetch(event.request));
-    return;
-  }
-
-  // 📄 HTML sempre atualizado
-  if (event.request.destination === "document") {
-    event.respondWith(
-      fetch(event.request).catch(() => caches.match(event.request))
-    );
-    return;
-  }
-
-  // 🎨 CSS / imagens do cache
   event.respondWith(
-    caches.match(event.request).then(resp => {
-      return resp || fetch(event.request);
-    })
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
