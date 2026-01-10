@@ -11,7 +11,6 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
-  singOut,
   getAuth,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -321,6 +320,7 @@ window.sair = async function () {
     console.error("Erro ao sair:", e);
   }
 };
+
 
 
 
