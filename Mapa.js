@@ -315,12 +315,13 @@ window.sair = async function () {
     sessionStorage.clear();
 
     // impede voltar com botão do navegador
-    window.location.replace("index.html");
+   window.location.href = "index.html";
 
   } catch (e) {
     console.error("Erro ao sair:", e);
   }
 };
+
 
 
 
