@@ -12,6 +12,12 @@ import {
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
+  authDomain: "clickmap-ae0ca.firebaseapp.com",
+  projectId: "clickmap-ae0ca"
+};
+
 window.login = () => {
   signInWithEmailAndPassword(auth, email.value, senha.value)
     .then(() => {
@@ -57,6 +63,7 @@ function msg(t, c) {
   m.innerText = t;
   m.style.color = c;
 }
+
 
 
 
