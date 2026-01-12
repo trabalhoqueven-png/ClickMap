@@ -32,12 +32,25 @@ window.login = () => {
 
 window.cadastrar = async () => {
   try {
-    const cred = await createUserWithEmailAndPassword(
+    const cred = await 
+      
+  createUserWithEmailAndPassword(
       auth,
       email.value,
       senha.value
     );
+    
+onAuthStateChanged(auth, user => {
+  if (user) {
+    location.href = "Mapa.html";
+  }
+});
 
+function msg(t, c) {
+  const m = document.getElementById("msg");
+  m.innerText = t;
+  m.style.color = c;
+}
     // 🔥 cria usuário com crédito inicial
     await setDoc(doc(db, "usuarios", cred.user.uid), {
       email: cred.user.email,
@@ -52,17 +65,7 @@ window.cadastrar = async () => {
 };
 
 
-onAuthStateChanged(auth, user => {
-  if (user) {
-    location.href = "Mapa.html";
-  }
-});
 
-function msg(t, c) {
-  const m = document.getElementById("msg");
-  m.innerText = t;
-  m.style.color = c;
-}
 
 
 
