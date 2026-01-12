@@ -16,9 +16,9 @@ import {
 
 // 🔥 CONFIG FIREBASE
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  projectId: "SEU_PROJECT_ID"
+  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
+  authDomain: "clickmap-ae0ca.firebaseapp.com",
+  projectId: "clickmap-ae0ca"
 };
 
 const app = initializeApp(firebaseConfig);
