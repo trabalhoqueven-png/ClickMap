@@ -62,6 +62,12 @@ window.cadastrar = async () => {
   }
 };
 
+onAuthStateChanged(auth, user => {
+  if (user) {
+    location.href = "Mapa.html";
+  }
+});
+
 function msg(t, c) {
   const m = document.getElementById("msg");
   m.innerText = t;
