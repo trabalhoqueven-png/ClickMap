@@ -39,8 +39,6 @@ window.cadastrar = async () => {
     );
 
     // 📧 envia verificação
-    await sendEmailVerification(cred.user);
-
     // 🔥 cria usuário no Firestore
     await setDoc(doc(db, "usuarios", cred.user.uid), {
       email: cred.user.email,
