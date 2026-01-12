@@ -54,6 +54,8 @@ async function carregarCredito() {
   const snap = await getDoc(ref);
 
   if (!snap.exists()) {
+    alert("Usuário sem crédito cadastrado!");
+    creditoUsuario = 0;
     atualizarCreditoTela();
     return;
   }
@@ -304,21 +306,7 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
-window.sair = async function () {
-  try {
-    await signOut(auth);
 
-    // limpa dados locais
-    localStorage.clear();
-    sessionStorage.clear();
-
-    // impede voltar com botão do navegador
-   window.location.href = "index.html";
-
-  } catch (e) {
-    console.error("Erro ao sair:", e);
-  }
-};
 
 
 
