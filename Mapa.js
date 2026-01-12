@@ -306,6 +306,22 @@ document.getElementById("buscar")
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
 });
+document.getElementById("btnSair").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+
+    // limpa dados locais
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // remove histórico (PWA + navegador)
+    window.location.replace("index.html");
+
+  } catch (e) {
+    console.error("Erro ao sair:", e);
+  }
+});
+
 
 
 
