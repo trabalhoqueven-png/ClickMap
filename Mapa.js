@@ -54,8 +54,6 @@ async function carregarCredito() {
   const snap = await getDoc(ref);
 
   if (!snap.exists()) {
-    alert("Usuário sem crédito cadastrado!");
-    creditoUsuario = 0;
     atualizarCreditoTela();
     return;
   }
@@ -321,6 +319,7 @@ window.sair = async function () {
     console.error("Erro ao sair:", e);
   }
 };
+
 
 
 
