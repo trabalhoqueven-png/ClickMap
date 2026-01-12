@@ -32,19 +32,35 @@ window.login = () => {
 
 window.cadastrar = async () => {
   try {
-    const cred = await 
-      
-  createUserWithEmailAndPassword(
+    const cred = await createUserWithEmailAndPassword(
       auth,
       email.value,
       senha.value
     );
-    
-onAuthStateChanged(auth, user => {
-  if (user) {
-    location.href = "Mapa.html";
+
+    // 📧 envia verificação
+    await sendEmailVerification(cred.user);
+
+    // 🔥 cria usuário no Firestore
+    await setDoc(doc(db, "usuarios", cred.user.uid), {
+      email: cred.user.email,
+      credito: 1,
+      criadoEm: new Date(),
+      verificado: false
+    });
+
+    // 🚪 DESLOGA IMEDIATAMENTE
+    await signOut(auth);
+
+    msg(
+      "📧 Cadastro criado! Verifique seu email e depois faça login.",
+      "green"
+    );
+
+  } catch (e) {
+    msg(e.message, "red");
   }
-});
+};
 
 function msg(t, c) {
   const m = document.getElementById("msg");
