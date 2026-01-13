@@ -3,6 +3,11 @@ import {
   getFirestore,
   collection,
   addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  serverTimestamp,
   getDocs,
   deleteDoc,
   doc,
@@ -10,6 +15,7 @@ import {
   updateDoc,
   getDoc,
   increment
+  
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
@@ -35,6 +41,7 @@ let marcadorUsuario = null;
 let circuloPrecisao = null;
 let ultimaPosicaoUsuario = null; 
 
+iniciarChatGlobal();
 iniciarLocalizacaoTempoReal();
 
 function getUltimaPosicao() {
@@ -437,6 +444,22 @@ document
       animate: true
     });
   });
+
+document.getElementById("btnEnviarChat").onclick = async () => {
+  const texto = document.getElementById("chatTexto").value.trim();
+
+  if (!texto || texto.length < 2) return;
+
+  await addDoc(collection(db, "chatGlobal"), {
+    uid: usuarioAtual.uid,
+    email: usuarioAtual.email,
+    mensagem: texto,
+    criadoEm: serverTimestamp()
+  });
+
+  document.getElementById("chatTexto").value = "";
+};
+
 
 
 
