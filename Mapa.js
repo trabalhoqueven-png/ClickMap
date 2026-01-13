@@ -33,7 +33,7 @@ let creditoUsuario = 0; // 🔥 AGORA EXISTE
 
 let marcadorUsuario = null;
 let circuloPrecisao = null;
-let seguindoUsuario = true; // se o mapa acompanha
+let ultimaPosicaoUsuario = null; 
 
 
 function getUltimaPosicao() {
@@ -381,60 +381,61 @@ window.reagir = async (casaId, tipo) => {
   carregarCasas();
 };
 function iniciarLocalizacaoTempoReal() {
-  if (!("geolocation" in navigator)) {
-    alert("Geolocalização não suportada no seu dispositivo");
+  if (!navigator.geolocation) {
+    alert("Geolocalização não suportada");
     return;
   }
 
   navigator.geolocation.watchPosition(
-    pos => {
+    (pos) => {
       const lat = pos.coords.latitude;
       const lng = pos.coords.longitude;
       const precisao = pos.coords.accuracy;
 
-      const latlng = [lat, lng];
+      ultimaPosicaoUsuario = [lat, lng];
 
-      // 🔵 bolinha do usuário
       if (!marcadorUsuario) {
-        marcadorUsuario = L.circleMarker(latlng, {
+        marcadorUsuario = L.circleMarker(ultimaPosicaoUsuario, {
           radius: 8,
           color: "#00aaff",
           fillColor: "#00aaff",
           fillOpacity: 1
         }).addTo(map);
 
-        // círculo de precisão
-        circuloPrecisao = L.circle(latlng, {
+        circuloPrecisao = L.circle(ultimaPosicaoUsuario, {
           radius: precisao,
           color: "#00aaff",
           fillColor: "#00aaff",
           fillOpacity: 0.15
         }).addTo(map);
-
-        map.setView(latlng, 16);
       } else {
-        marcadorUsuario.setLatLng(latlng);
-        circuloPrecisao.setLatLng(latlng);
+        marcadorUsuario.setLatLng(ultimaPosicaoUsuario);
+        circuloPrecisao.setLatLng(ultimaPosicaoUsuario);
         circuloPrecisao.setRadius(precisao);
       }
-
-      // 📍 acompanha o usuário
-      if (seguindoUsuario) {
-        map.setView(latlng);
-      }
     },
-    erro => {
+    (erro) => {
       console.error("Erro de localização:", erro);
-      alert("Não foi possível acessar sua localização");
     },
     {
       enableHighAccuracy: true,
-      maximumAge: 2000,
-      timeout: 10000
+      maximumAge: 10000,
+      timeout: 15000
     }
   );
 }
+document
+  .getElementById("btnMinhaLocalizacao")
+  .addEventListener("click", () => {
+    if (!ultimaPosicaoUsuario) {
+      alert("Localização ainda não disponível");
+      return;
+    }
 
+    map.setView(ultimaPosicaoUsuario, 17, {
+      animate: true
+    });
+  });
 
 
 
