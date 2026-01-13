@@ -192,5 +192,25 @@ body {
   opacity: 0.95;
 }
 
+.reacoes {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.reacoes button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.reacoes button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
 
 
