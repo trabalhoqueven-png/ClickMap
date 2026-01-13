@@ -340,21 +340,37 @@ document.getElementById("btnSair").addEventListener("click", async () => {
   }
 });
 window.reagir = async (casaId, tipo) => {
-  try {
-    const ref = doc(db, "casas", casaId);
-
-    await updateDoc(ref, {
-      [`reacoes.${tipo}`]: increment(1)
-    });
-
-    limparMapa();
-    carregarCasas();
-
-  } catch (e) {
-    console.error("Erro ao reagir:", e);
-    alert("Erro ao registrar reação");
+  if (!usuarioAtual) {
+    alert("Faça login para reagir");
+    return;
   }
+
+  const ref = doc(db, "casas", casaId);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return;
+
+  const dados = snap.data();
+  const reacoes = dados.reacoes || {};
+
+  // 🔥 remove reação antiga do usuário
+  Object.keys(reacoes).forEach(r => {
+    if (reacoes[r]?.[usuarioAtual.uid]) {
+      delete reacoes[r][usuarioAtual.uid];
+    }
+  });
+
+  // 🔥 adiciona nova reação
+  if (!reacoes[tipo]) reacoes[tipo] = {};
+  reacoes[tipo][usuarioAtual.uid] = true;
+
+  await updateDoc(ref, { reacoes });
+
+  limparMapa();
+  carregarCasas();
 };
+
+
 
 
 
