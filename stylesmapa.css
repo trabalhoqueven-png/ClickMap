@@ -193,7 +193,7 @@ body {
 }
 
 .reacoes {
-  color: #ff4d4d;
+  
   display: flex;
   gap: 6px;
   margin-top: 6px;
@@ -204,14 +204,16 @@ body {
   border: none;
   border-radius: 20px;
   padding: 6px 10px;
-  color: #fff;
+  color: #ff4d4d;
   cursor: pointer;
   font-size: 13px;
 }
 
 .reacoes button:hover {
+  color: black;
   background: rgba(255,255,255,0.25);
 }
+
 
 
 
