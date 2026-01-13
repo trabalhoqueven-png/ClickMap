@@ -238,10 +238,10 @@ async function carregarCasas() {
   ${d.descricao}<br><br>
 
   <div class="reacoes">
-    <button onclick="reagir('${id}','like')">👍 ${d.reacoes?.like || 0}</button>
-    <button onclick="reagir('${id}','love')">❤️ ${d.reacoes?.love || 0}</button>
-    <button onclick="reagir('${id}','laugh')">😂 ${d.reacoes?.laugh || 0}</button>
-    <button onclick="reagir('${id}','wow')">😮 ${d.reacoes?.wow || 0}</button>
+    <button onclick="reagir('${id}','like')">👍 ${likes}</button>
+    <button onclick="reagir('${id}','love')">❤️ ${loves}</button>
+    <button onclick="reagir('${id}','laugh')">😂 ${laughs}</button>
+    <button onclick="reagir('${id}','wow')">😮 ${wows}</button>
   </div>
 
   ${excluir}
@@ -367,6 +367,7 @@ window.reagir = async (casaId, tipo) => {
   limparMapa();
   carregarCasas();
 };
+
 
 
 
