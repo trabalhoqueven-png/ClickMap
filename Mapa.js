@@ -8,7 +8,8 @@ import {
   doc,
   setDoc,
   updateDoc,
-  getDoc
+  getDoc,
+  increment
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
@@ -339,23 +340,22 @@ document.getElementById("btnSair").addEventListener("click", async () => {
   }
 });
 window.reagir = async (casaId, tipo) => {
-  const ref = doc(db, "casas", casaId);
-  const snap = await getDoc(ref);
+  try {
+    const ref = doc(db, "casas", casaId);
 
-  if (!snap.exists()) return;
+    await updateDoc(ref, {
+      [`reacoes.${tipo}`]: increment(1)
+    });
 
-  const dados = snap.data();
-  const reacoes = dados.reacoes || {};
+    limparMapa();
+    carregarCasas();
 
-  reacoes[tipo] = (reacoes[tipo] || 0) + 1;
-
-  await updateDoc(ref, {
-    reacoes
-  });
-
-  limparMapa();
-  carregarCasas();
+  } catch (e) {
+    console.error("Erro ao reagir:", e);
+    alert("Erro ao registrar reação");
+  }
 };
+
 
 
 
