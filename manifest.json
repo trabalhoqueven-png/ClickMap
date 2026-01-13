@@ -1,6 +1,6 @@
 {
-  "name": "QMobile - Mapa de Casas",
-  "short_name": "QMobile",
+  "name": "QMap - Mapa de Casas",
+  "short_name": "QMap",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
@@ -18,3 +18,4 @@
     }
   ]
 }
+
