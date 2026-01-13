@@ -213,6 +213,56 @@ body {
   color: black;
   background: rgba(255,255,255,0.25);
 }
+.chat-box {
+  margin-top: 15px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.chat-box h3 {
+  text-align: center;
+  color: #ff4d4d;
+  margin-bottom: 6px;
+}
+
+#chatMensagens {
+  height: 180px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.msg {
+  margin-bottom: 6px;
+}
+
+.msg span {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.chat-input {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+}
+
+.chat-input button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
 
 
 
