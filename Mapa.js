@@ -231,22 +231,29 @@ async function carregarCasas() {
         excluir = `<button class="btn-excluir" onclick="excluirCasa('${id}')">🗑️ Excluir</button>`;
       }
 
-   L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
-  <strong>${d.titulo}</strong><br>
-  💰 R$ ${d.preco}<br>
-  <img src="${d.fotoBase64}" width="180"><br>
-  ${d.descricao}<br><br>
+      const likes  = d.reacoes?.like  ? Object.keys(d.reacoes.like).length  : 0;
+      const loves  = d.reacoes?.love  ? Object.keys(d.reacoes.love).length  : 0;
+      const laughs = d.reacoes?.laugh ? Object.keys(d.reacoes.laugh).length : 0;
+      const wows   = d.reacoes?.wow   ? Object.keys(d.reacoes.wow).length   : 0;
 
-  <div class="reacoes">
-    <button onclick="reagir('${id}','like')">👍 ${likes}</button>
-    <button onclick="reagir('${id}','love')">❤️ ${loves}</button>
-    <button onclick="reagir('${id}','laugh')">😂 ${laughs}</button>
-    <button onclick="reagir('${id}','wow')">😮 ${wows}</button>
-  </div>
+      L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
+        <strong>${d.titulo}</strong><br>
+        💰 R$ ${d.preco}<br>
+        <img src="${d.fotoBase64}" width="180"><br>
+        ${d.descricao}<br><br>
 
-  ${excluir}
-`);
-};
+        <div class="reacoes">
+          <button onclick="reagir('${id}','like')">👍 ${likes}</button>
+          <button onclick="reagir('${id}','love')">❤️ ${loves}</button>
+          <button onclick="reagir('${id}','laugh')">😂 ${laughs}</button>
+          <button onclick="reagir('${id}','wow')">😮 ${wows}</button>
+        </div>
+
+        ${excluir}
+      `);
+    }
+  });
+}
 // ❌ excluir casa
 window.excluirCasa = async (id) => {
   if (!confirm("Excluir esta casa?")) return;
@@ -367,6 +374,7 @@ window.reagir = async (casaId, tipo) => {
   limparMapa();
   carregarCasas();
 };
+
 
 
 
