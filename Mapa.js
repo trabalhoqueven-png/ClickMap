@@ -248,8 +248,6 @@ async function carregarCasas() {
 
   ${excluir}
 `);
-    }
-  });
 }
 
 // ❌ excluir casa
@@ -371,6 +369,7 @@ window.reagir = async (casaId, tipo) => {
   limparMapa();
   carregarCasas();
 };
+
 
 
 
