@@ -35,6 +35,7 @@ let marcadorUsuario = null;
 let circuloPrecisao = null;
 let ultimaPosicaoUsuario = null; 
 
+iniciarLocalizacaoTempoReal();
 
 function getUltimaPosicao() {
   const salvo = localStorage.getItem("ultimaPosicaoMapa");
@@ -436,6 +437,7 @@ document
       animate: true
     });
   });
+
 
 
 
