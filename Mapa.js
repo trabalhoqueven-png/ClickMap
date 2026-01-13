@@ -31,6 +31,11 @@ let usuarioAtual = null;
 let coordenadas = null;
 let creditoUsuario = 0; // 🔥 AGORA EXISTE
 
+let marcadorUsuario = null;
+let circuloPrecisao = null;
+let seguindoUsuario = true; // se o mapa acompanha
+
+
 function getUltimaPosicao() {
   const salvo = localStorage.getItem("ultimaPosicaoMapa");
   if (!salvo) return null;
@@ -327,6 +332,7 @@ document.getElementById("buscar")
 
 map.whenReady(() => {
   document.body.classList.add("mapa-ok");
+  iniciarLocalizacaoTempoReal();
 });
 document.getElementById("btnSair").addEventListener("click", async () => {
   try {
@@ -374,6 +380,61 @@ window.reagir = async (casaId, tipo) => {
   limparMapa();
   carregarCasas();
 };
+function iniciarLocalizacaoTempoReal() {
+  if (!("geolocation" in navigator)) {
+    alert("Geolocalização não suportada no seu dispositivo");
+    return;
+  }
+
+  navigator.geolocation.watchPosition(
+    pos => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const precisao = pos.coords.accuracy;
+
+      const latlng = [lat, lng];
+
+      // 🔵 bolinha do usuário
+      if (!marcadorUsuario) {
+        marcadorUsuario = L.circleMarker(latlng, {
+          radius: 8,
+          color: "#00aaff",
+          fillColor: "#00aaff",
+          fillOpacity: 1
+        }).addTo(map);
+
+        // círculo de precisão
+        circuloPrecisao = L.circle(latlng, {
+          radius: precisao,
+          color: "#00aaff",
+          fillColor: "#00aaff",
+          fillOpacity: 0.15
+        }).addTo(map);
+
+        map.setView(latlng, 16);
+      } else {
+        marcadorUsuario.setLatLng(latlng);
+        circuloPrecisao.setLatLng(latlng);
+        circuloPrecisao.setRadius(precisao);
+      }
+
+      // 📍 acompanha o usuário
+      if (seguindoUsuario) {
+        map.setView(latlng);
+      }
+    },
+    erro => {
+      console.error("Erro de localização:", erro);
+      alert("Não foi possível acessar sua localização");
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 2000,
+      timeout: 10000
+    }
+  );
+}
+
 
 
 
