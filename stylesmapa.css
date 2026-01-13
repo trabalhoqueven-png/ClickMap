@@ -193,6 +193,7 @@ body {
 }
 
 .reacoes {
+  color: #ff4d4d;
   display: flex;
   gap: 6px;
   margin-top: 6px;
@@ -211,6 +212,7 @@ body {
 .reacoes button:hover {
   background: rgba(255,255,255,0.25);
 }
+
 
 
 
