@@ -176,7 +176,16 @@ document.getElementById("salvar").onclick = async () => {
            lng: coordenadas.lng,
            usuario: usuarioAtual.uid,
            publico,
-           criadoEm: new Date()
+           criadoEm: new Date(),
+           
+           reacoes: 
+           {
+          like: 0,
+          love: 0,
+          laugh: 0,
+          wow: 0
+          }
+           
          });
 
       // 💸 DESCONTA CRÉDITO
@@ -222,12 +231,20 @@ async function carregarCasas() {
       }
 
       L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
-        <strong>${d.titulo}</strong><br>
-        💰 R$ ${d.preco}<br>
-        <img src="${d.fotoBase64}" width="180"><br>
-        ${d.descricao}<br>
-        ${excluir}
-      `);
+  <strong>${d.titulo}</strong><br>
+  💰 R$ ${d.preco}<br>
+  <img src="${d.fotoBase64}" width="180"><br>
+  ${d.descricao}<br><br>
+
+  <div class="reacoes">
+    <button onclick="reagir('${id}','like')">👍 ${d.reacoes?.like || 0}</button>
+    <button onclick="reagir('${id}','love')">❤️ ${d.reacoes?.love || 0}</button>
+    <button onclick="reagir('${id}','laugh')">😂 ${d.reacoes?.laugh || 0}</button>
+    <button onclick="reagir('${id}','wow')">😮 ${d.reacoes?.wow || 0}</button>
+  </div>
+
+  ${excluir}
+`);
     }
   });
 }
@@ -321,6 +338,25 @@ document.getElementById("btnSair").addEventListener("click", async () => {
     console.error("Erro ao sair:", e);
   }
 });
+window.reagir = async (casaId, tipo) => {
+  const ref = doc(db, "casas", casaId);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return;
+
+  const dados = snap.data();
+  const reacoes = dados.reacoes || {};
+
+  reacoes[tipo] = (reacoes[tipo] || 0) + 1;
+
+  await updateDoc(ref, {
+    reacoes
+  });
+
+  limparMapa();
+  carregarCasas();
+};
+
 
 
 
