@@ -231,18 +231,20 @@ async function carregarCasas() {
         excluir = `<button class="btn-excluir" onclick="excluirCasa('${id}')">🗑️ Excluir</button>`;
       }
 
-      L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
+     L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
   <strong>${d.titulo}</strong><br>
   💰 R$ ${d.preco}<br>
   <img src="${d.fotoBase64}" width="180"><br>
   ${d.descricao}<br><br>
 
-  <div class="reacoes">
-    <button onclick="reagir('${id}','like')">👍 ${d.reacoes?.like || 0}</button>
-    <button onclick="reagir('${id}','love')">❤️ ${d.reacoes?.love || 0}</button>
-    <button onclick="reagir('${id}','laugh')">😂 ${d.reacoes?.laugh || 0}</button>
-    <button onclick="reagir('${id}','wow')">😮 ${d.reacoes?.wow || 0}</button>
-  </div>
+  👍 ${likes}
+  <button onclick="reagir('${id}', 'like')">👍</button>
+
+  ❤️ ${loves}
+  <button onclick="reagir('${id}', 'love')">❤️</button>
+
+  😂 ${hahas}
+  <button onclick="reagir('${id}', 'haha')">😂</button>
 
   ${excluir}
 `);
@@ -369,6 +371,7 @@ window.reagir = async (casaId, tipo) => {
   limparMapa();
   carregarCasas();
 };
+
 
 
 
