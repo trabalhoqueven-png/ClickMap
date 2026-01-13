@@ -84,7 +84,7 @@ window.cadastrar = async () => {
     await signOut(auth);
 
     msg(
-      "📧 Cadastro criado! Verifique seu email para entrar.",
+      "📧 Cadastro criado! Verifique seu email /SPAM para entrar.",
       "lime"
     );
 
