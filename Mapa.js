@@ -231,24 +231,21 @@ async function carregarCasas() {
         excluir = `<button class="btn-excluir" onclick="excluirCasa('${id}')">🗑️ Excluir</button>`;
       }
 
-     L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
+   L.marker([d.lat, d.lng]).addTo(map).bindPopup(`
   <strong>${d.titulo}</strong><br>
   💰 R$ ${d.preco}<br>
   <img src="${d.fotoBase64}" width="180"><br>
   ${d.descricao}<br><br>
 
-  👍 ${likes}
-  <button onclick="reagir('${id}', 'like')">👍</button>
-
-  ❤️ ${loves}
-  <button onclick="reagir('${id}', 'love')">❤️</button>
-
-  😂 ${hahas}
-  <button onclick="reagir('${id}', 'haha')">😂</button>
+  <div class="reacoes">
+    <button onclick="reagir('${id}','like')">👍 ${d.reacoes?.like || 0}</button>
+    <button onclick="reagir('${id}','love')">❤️ ${d.reacoes?.love || 0}</button>
+    <button onclick="reagir('${id}','laugh')">😂 ${d.reacoes?.laugh || 0}</button>
+    <button onclick="reagir('${id}','wow')">😮 ${d.reacoes?.wow || 0}</button>
+  </div>
 
   ${excluir}
 `);
-}
 
 // ❌ excluir casa
 window.excluirCasa = async (id) => {
@@ -340,35 +337,22 @@ document.getElementById("btnSair").addEventListener("click", async () => {
   }
 });
 window.reagir = async (casaId, tipo) => {
-  if (!usuarioAtual) {
-    alert("Faça login para reagir");
-    return;
+  try {
+    const ref = doc(db, "casas", casaId);
+
+    await updateDoc(ref, {
+      [`reacoes.${tipo}`]: increment(1)
+    });
+
+    limparMapa();
+    carregarCasas();
+
+  } catch (e) {
+    console.error("Erro ao reagir:", e);
+    alert("Erro ao registrar reação");
   }
-
-  const ref = doc(db, "casas", casaId);
-  const snap = await getDoc(ref);
-
-  if (!snap.exists()) return;
-
-  const dados = snap.data();
-  const reacoes = dados.reacoes || {};
-
-  // 🔥 remove reação antiga do usuário
-  Object.keys(reacoes).forEach(r => {
-    if (reacoes[r]?.[usuarioAtual.uid]) {
-      delete reacoes[r][usuarioAtual.uid];
-    }
-  });
-
-  // 🔥 adiciona nova reação
-  if (!reacoes[tipo]) reacoes[tipo] = {};
-  reacoes[tipo][usuarioAtual.uid] = true;
-
-  await updateDoc(ref, { reacoes });
-
-  limparMapa();
-  carregarCasas();
 };
+
 
 
 
