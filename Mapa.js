@@ -246,7 +246,7 @@ async function carregarCasas() {
 
   ${excluir}
 `);
-
+};
 // ❌ excluir casa
 window.excluirCasa = async (id) => {
   if (!confirm("Excluir esta casa?")) return;
@@ -352,6 +352,7 @@ window.reagir = async (casaId, tipo) => {
     alert("Erro ao registrar reação");
   }
 };
+
 
 
 
