@@ -41,9 +41,6 @@ let marcadorUsuario = null;
 let circuloPrecisao = null;
 let ultimaPosicaoUsuario = null; 
 
-iniciarChatGlobal();
-iniciarLocalizacaoTempoReal();
-
 function getUltimaPosicao() {
   const salvo = localStorage.getItem("ultimaPosicaoMapa");
   if (!salvo) return null;
@@ -459,6 +456,7 @@ document.getElementById("btnEnviarChat").onclick = async () => {
 
   document.getElementById("chatTexto").value = "";
 };
+
 
 
 
