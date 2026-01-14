@@ -56,6 +56,20 @@ onAuthStateChanged(auth, async user => {
 
     await carregarCredito(); // 🔥 AGUARDA
     carregarCasas();
+
+    onAuthStateChanged(auth, async user => {
+  if (!user) {
+    location.href = "index.html";
+  } else {
+    usuarioAtual = user;
+
+    await carregarCredito();
+    carregarCasas();
+
+    iniciarChatGlobal(); // 🔥 AQUI
+  }
+});
+
   }
 });
 
@@ -456,6 +470,41 @@ document.getElementById("btnEnviarChat").onclick = async () => {
 
   document.getElementById("chatTexto").value = "";
 };
+function iniciarChatGlobal() {
+  const chatBox = document.getElementById("chatMensagens");
+
+  if (!chatBox) {
+    console.warn("Chat não encontrado no HTML");
+    return;
+  }
+
+  const q = query(
+    collection(db, "chatGlobal"),
+    orderBy("criadoEm", "asc"),
+    limit(50)
+  );
+
+  onSnapshot(q, (snapshot) => {
+    chatBox.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const d = doc.data();
+
+      const div = document.createElement("div");
+      div.className = "msg-chat";
+
+      div.innerHTML = `
+        <strong>${d.email}</strong><br>
+        <span>${d.mensagem}</span>
+      `;
+
+      chatBox.appendChild(div);
+    });
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+}
+
 
 
 
