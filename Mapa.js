@@ -271,6 +271,27 @@ async function carregarCasas() {
           <button onclick="reagir('${id}','love')">❤️ ${loves}</button>
           <button onclick="reagir('${id}','laugh')">😂 ${laughs}</button>
           <button onclick="reagir('${id}','wow')">😮 ${wows}</button>
+          <button onclick="compartilharCasa(
+    '${id}',
+    '${d.titulo.replace(/'/g, "")}',
+    '${d.preco}',
+    '${d.lat}',
+    '${d.lng}'
+  )"
+  style="
+    margin-top:8px;
+    width:100%;
+    padding:8px;
+    border:none;
+    border-radius:10px;
+    background:#25D366;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+  "
+>
+📤 Compartilhar
+</button>
         </div>
 
         ${excluir}
@@ -504,6 +525,32 @@ function iniciarChatGlobal() {
     chatBox.scrollTop = chatBox.scrollHeight;
   });
 }
+window.compartilharCasa = (id, titulo, preco, lat, lng) => {
+  const linkMapa = `https://www.google.com/maps?q=${lat},${lng}`;
+
+  const texto = `🏠 *${titulo}*
+💰 Preço: R$ ${preco}
+
+📍 Veja no mapa:
+${linkMapa}
+
+🔗 Compartilhado via ClickMap`;
+
+  // 📱 Compartilhamento nativo (celular)
+  if (navigator.share) {
+    navigator.share({
+      title: titulo,
+      text: texto,
+      url: linkMapa
+    }).catch(err => console.log("Compartilhamento cancelado"));
+  } 
+  // 💬 Fallback WhatsApp
+  else {
+    const urlWhats = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+    window.open(urlWhats, "_blank");
+  }
+};
+
 
 
 
