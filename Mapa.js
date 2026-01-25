@@ -47,10 +47,6 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
-map.whenReady(() => {
-  iniciarLocalizacaoTempoReal();
-  abrirCasaPorLink(); // 🔥 AQUI
-});
 
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
@@ -588,6 +584,7 @@ async function abrirCasaPorLink() {
     console.error("Erro ao abrir casa via link:", e);
   }
 }
+
 
 
 
