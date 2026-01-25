@@ -582,6 +582,10 @@ async function abrirCasaPorLink() {
     console.error("Erro ao abrir casa via link:", e);
   }
 }
+map.whenReady(() => {
+  iniciarLocalizacaoTempoReal();
+  abrirCasaPorLink(); // 🔥 AQUI
+});
 
 
 
