@@ -47,6 +47,11 @@ function getUltimaPosicao() {
   return JSON.parse(salvo);
 }
 
+map.whenReady(() => {
+  iniciarLocalizacaoTempoReal();
+  abrirCasaPorLink(); // 🔥 AQUI
+});
+
 // 🔐 Login + crédito
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -271,12 +276,11 @@ async function carregarCasas() {
           <button onclick="reagir('${id}','love')">❤️ ${loves}</button>
           <button onclick="reagir('${id}','laugh')">😂 ${laughs}</button>
           <button onclick="reagir('${id}','wow')">😮 ${wows}</button>
-          <button onclick="compartilharCasa(
+          <button
+  onclick="compartilharCasa(
     '${id}',
     '${d.titulo.replace(/'/g, "")}',
-    '${d.preco}',
-    '${d.lat}',
-    '${d.lng}'
+    '${d.preco}'
   )"
   style="
     margin-top:8px;
@@ -290,7 +294,7 @@ async function carregarCasas() {
     cursor:pointer;
   "
 >
-📤 Compartilhar
+📤 Compartilhar no ClickMap
 </button>
         </div>
 
@@ -525,31 +529,66 @@ function iniciarChatGlobal() {
     chatBox.scrollTop = chatBox.scrollHeight;
   });
 }
-window.compartilharCasa = (id, titulo, preco, lat, lng) => {
-  const linkMapa = `https://www.google.com/maps?q=${lat},${lng}`;
+window.compartilharCasa = (id, titulo, preco) => {
+  const linkPlataforma =
+    `https://trabalhoqueven-png.github.io/ClickMap/?casa=${id}`;
 
   const texto = `🏠 *${titulo}*
 💰 Preço: R$ ${preco}
 
 📍 Veja no mapa:
-${linkMapa}
+${linkPlataforma}
 
-🔗 Compartilhado via ClickMap`;
+🔗 ClickMap`;
 
-  // 📱 Compartilhamento nativo (celular)
+  // 📱 Compartilhamento nativo (mobile)
   if (navigator.share) {
     navigator.share({
       title: titulo,
       text: texto,
-      url: linkMapa
-    }).catch(err => console.log("Compartilhamento cancelado"));
+      url: linkPlataforma
+    });
   } 
-  // 💬 Fallback WhatsApp
+  // 💬 WhatsApp / PC
   else {
-    const urlWhats = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+    const urlWhats =
+      `https://wa.me/?text=${encodeURIComponent(texto)}`;
     window.open(urlWhats, "_blank");
   }
 };
+
+
+
+async function abrirCasaPorLink() {
+  const params = new URLSearchParams(window.location.search);
+  const casaId = params.get("casa");
+
+  if (!casaId) return;
+
+  try {
+    const ref = doc(db, "casas", casaId);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) return;
+
+    const d = snap.data();
+
+    map.setView([d.lat, d.lng], 17);
+
+    const marker = L.marker([d.lat, d.lng]).addTo(map);
+
+    marker.bindPopup(`
+      <strong>${d.titulo}</strong><br>
+      💰 R$ ${d.preco}<br>
+      <img src="${d.fotoBase64}" width="180"><br>
+      ${d.descricao}
+    `).openPopup();
+
+  } catch (e) {
+    console.error("Erro ao abrir casa via link:", e);
+  }
+}
+
 
 
 
