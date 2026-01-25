@@ -555,38 +555,6 @@ ${linkPlataforma}
 
 
 
-async function abrirCasaPorLink() {
-  const params = new URLSearchParams(window.location.search);
-  const casaId = params.get("casa");
-
-  if (!casaId) return;
-
-  try {
-    const ref = doc(db, "casas", casaId);
-    const snap = await getDoc(ref);
-
-    if (!snap.exists()) return;
-
-    const d = snap.data();
-
-    map.setView([d.lat, d.lng], 17);
-
-    const marker = L.marker([d.lat, d.lng]).addTo(map);
-
-    marker.bindPopup(`
-      <strong>${d.titulo}</strong><br>
-      💰 R$ ${d.preco}<br>
-      <img src="${d.fotoBase64}" width="180"><br>
-      ${d.descricao}
-    `).openPopup();
-
-  } catch (e) {
-    console.error("Erro ao abrir casa via link:", e);
-  }
-}
-
-
-
 
 
 
