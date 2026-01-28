@@ -26,10 +26,11 @@
   🎲 GIRAR
 </button>
     
-<div class="bet-control">
-  <button onclick="alterarAposta(-1)">➖</button>
-  <span>Aposta: <strong id="aposta">1</strong></span>
-  <button onclick="alterarAposta(1)">➕</button>
+<p>Aposta atual: <span id="apostaValor">1</span> crédito(s)</p>
+
+<div class="aposta-controls">
+  <button onclick="diminuirAposta()">➖</button>
+  <button onclick="aumentarAposta()">➕</button>
 </div>
 
     <p id="msg"></p>
