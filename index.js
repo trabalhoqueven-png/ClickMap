@@ -1,3 +1,4 @@
+import { auth, db } from "./firebase.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
@@ -20,10 +21,6 @@ const firebaseConfig = {
   authDomain: "qcassino-227ab.firebaseapp.com",
   projectId: "qcassino-227ab"
 };
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 // 🔹 ELEMENTOS
 const email = document.getElementById("email");
