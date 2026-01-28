@@ -1,58 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head> 
+<head>
   <meta charset="UTF-8">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#b30000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>QCasino - Login</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
 </head>
-<body class="inicio">
+<body>
 
-<div class="login-box">
-  <h2>Entrar No Cassino</h2>
+<h2>Entrar no QCasino</h2>
 
-  <div class="input-box">
-  <i class="fa-solid fa-envelope"></i>
-  <input id="email" type="email" placeholder="Email">
-</div>
+<input id="email" placeholder="Email">
+<input id="senha" type="password" placeholder="Senha">
 
-<div class="input-box">
-  <i class="fa-solid fa-lock"></i>
-  <input id="senha" type="password" placeholder="Senha">
+<button onclick="login()">Login</button>
+<button onclick="cadastrar()">Cadastrar</button>
 
-</div>
+<p id="msg"></p>
 
-  <button class="btn login" type="button" onclick="login()">Login</button>
-  <button class="btn cadastro" type="button" onclick="cadastrar()">Cadastrar</button>
-  <p id="msg"></p>
-  
-<!-- CONTATO -->
-    <div class="contato">
-      <p>Contato</p>
-
-      <a href="https://wa.me/5564974008793" target="_blank" class="btn-contato whatsapp">
-        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-      </a>
-
-      <a href="https://www.instagram.com/queven_reis"target="_blank" class="btn-contato instagram">
-        <i class="fa-brands fa-instagram"></i> Instagram
-      </a>
-      <p id="ifo">PRDC - Qcassino</p>
-    </div>
-
-</div>
-
-<script type="module" src="index.js"></script>
-
+<script type="module" src="auth.js"></script>
 </body>
 </html>
-
-
-
-
-
-
