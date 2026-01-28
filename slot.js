@@ -81,3 +81,16 @@ window.jogar = async () => {
 window.voltar = () => {
   location.href = "lobby.html";
 };
+window.aumentarAposta = () => {
+  if (aposta < 10) { // limite opcional
+    aposta++;
+    apostaEl.innerText = aposta;
+  }
+};
+
+window.diminuirAposta = () => {
+  if (aposta > 1) {
+    aposta--;
+    apostaEl.innerText = aposta;
+  }
+};
