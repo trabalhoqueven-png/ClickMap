@@ -1,0 +1,30 @@
+.slots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+/* já melhora no mobile */
+@media (max-width: 480px) {
+  .slot {
+    width: 70px;
+    height: 70px;
+    font-size: 42px;
+  }
+}
+
+.win-slot {
+  animation: winGlow 0.8s ease-in-out infinite alternate;
+  border-color: gold;
+  box-shadow: 0 0 15px gold;
+}
+
+@keyframes winGlow {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
