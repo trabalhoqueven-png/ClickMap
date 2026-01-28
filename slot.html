@@ -8,32 +8,23 @@
 </head>
 
 <body>
-  <div class="lobby">
+  <div class="container">
 
-    <div class="top-bar">
-      <div class="logo">🎰 SLOT</div>
-      <div class="saldo">
-        Saldo: <span id="saldo">0</span>
-      </div>
-      <button onclick="voltar()">Voltar</button>
-    </div>
-
-    <div class="banner">
-      <h1>Slot Clássico</h1>
-      <p>Aposta: 1 crédito</p>
-    </div>
+    <header class="top-bar">
+      <span>🎰 SLOT</span>
+      <span>Saldo: <b id="saldo">0</b></span>
+      <button onclick="voltar()">⬅ Voltar</button>
+    </header>
 
     <div class="slots">
-  <div id="r1" class="slot">🍒</div>
-  <div id="r2" class="slot">🍋</div>
-  <div id="r3" class="slot">🔔</div>
-</div>
-    
-<button id="btnSpin" class="btn-spin" onclick="jogar()">
-  🎲 GIRAR
-</button>
+      <div id="r1" class="slot">🍒</div>
+      <div id="r2" class="slot">🍋</div>
+      <div id="r3" class="slot">🔔</div>
+    </div>
 
-<p id="msg" style="text-align:center;margin-top:12px"></p>
+    <button id="btnSpin" onclick="jogar()">🎲 GIRAR</button>
+
+    <p id="msg"></p>
 
   </div>
 
