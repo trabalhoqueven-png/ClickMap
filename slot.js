@@ -68,7 +68,7 @@ window.jogar = async () => {
     await updateDoc(ref, { credito: increment(-1) });
 
     if (s1 === s2 || s2 === s3 || s1 === s3) {
-      await updateDoc(ref, { credito: increment(1) });
+      await updateDoc(ref, { credito: increment(2) });
       msg.innerText = "🎉 VOCÊ GANHOU +1!";
       msg.classList.add("win");
     } else {
