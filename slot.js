@@ -1,14 +1,8 @@
 import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-import {
-  doc, getDoc, updateDoc, increment
+  doc, getDoc, setDoc, updateDoc, increment
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-console.log("UID:", uid);
-console.log("Saldo:", snap.data()?.credito);
 
 const saldoEl = document.getElementById("saldo");
 const msg = document.getElementById("msg");
@@ -37,59 +31,56 @@ onAuthStateChanged(auth, async user => {
 
 window.jogar = async () => {
   if (!uid) return;
-  
+
   msg.innerText = "";
   msg.className = "";
 
   const btn = document.getElementById("btnSpin");
   btn.disabled = true;
-  
+
   const ref = doc(db, "usuarios", uid);
   const snap = await getDoc(ref);
   let saldo = snap.data().credito;
 
   if (saldo < 1) {
     msg.innerText = "❌ Saldo insuficiente";
+    btn.disabled = false;
     return;
   }
-  
-  // inicia animação
+
   r1.classList.add("girando");
   r2.classList.add("girando");
   r3.classList.add("girando");
-  
-  // 🎲 sorteio
-  const simbolos = ["🍒","🍋","🔔","⭐","💎"];
 
   const s1 = simbolos[Math.floor(Math.random()*simbolos.length)];
   const s2 = simbolos[Math.floor(Math.random()*simbolos.length)];
   const s3 = simbolos[Math.floor(Math.random()*simbolos.length)];
-  
-  // espera 1 segundo (efeito giro)
+
   setTimeout(async () => {
-   r1.classList.remove("girando");
-   r2.classList.remove("girando");
-   r3.classList.remove("girando");
-  
-  r1.innerText = s1;
-  r2.innerText = s2;
-  r3.innerText = s3;
+    r1.classList.remove("girando");
+    r2.classList.remove("girando");
+    r3.classList.remove("girando");
 
-  // perde 1 crédito
-  await updateDoc(ref, { credito: increment(-1) });
+    r1.innerText = s1;
+    r2.innerText = s2;
+    r3.innerText = s3;
 
-  // vitória
-  if (s1 === s2 || s2 === s3 || s1 === s3) {
-    await updateDoc(ref, { credito: increment(2) });
-    msg.innerText = "🎉 VOCÊ GANHOU +2!";
-    msg.classList.add("win");
-  } else {
-    msg.innerText = "😢 Não foi dessa vez";
-    msg.classList.add("lose");
-  }
+    await updateDoc(ref, { credito: increment(-1) });
 
-  const novoSnap = await getDoc(ref);
-  saldoEl.innerText = novoSnap.data().credito;
+    if (s1 === s2 || s2 === s3 || s1 === s3) {
+      await updateDoc(ref, { credito: increment(2) });
+      msg.innerText = "🎉 VOCÊ GANHOU +2!";
+      msg.classList.add("win");
+    } else {
+      msg.innerText = "😢 Não foi dessa vez";
+      msg.classList.add("lose");
+    }
+
+    const novoSnap = await getDoc(ref);
+    saldoEl.innerText = novoSnap.data().credito;
+
+    btn.disabled = false;
+  }, 1000);
 };
 
 window.voltar = () => {
