@@ -4,12 +4,26 @@
 
 body {
   margin: 0;
-  background: #0b0b0b;
   font-family: Arial, sans-serif;
   color: white;
+
+  background: 
+    linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.85)
+    ),
+    url("bg-casino.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 .container {
+  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.35);
+  border-radius: 16px;
   min-height: 100vh;
   max-width: 420px;
   margin: auto;
@@ -90,5 +104,10 @@ body {
 @media (min-width: 768px) {
   .container {
     max-width: 360px;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    background-position: top center;
   }
 }
