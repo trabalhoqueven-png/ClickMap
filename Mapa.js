@@ -20,22 +20,26 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// 🔐 Protege o lobby + carrega saldo
 onAuthStateChanged(auth, async user => {
   if (!user) return location.href = "index.html";
 
   const snap = await getDoc(doc(db, "users", user.uid));
+  const credits = snap.exists() ? (snap.data().credits ?? 0) : 0;
+
   document.getElementById("saldo").innerText =
-   (snap.data().credits ?? 0) + " créditos";
+    credits + " créditos";
 });
 
-// 🚪 BOTÃO SAIR
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnSair").addEventListener("click", async () => {
+    if (!confirm("Deseja sair da conta?")) return;
     await signOut(auth);
     location.href = "index.html";
   });
 });
+
+});
+
 
 
 
