@@ -6,6 +6,9 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+let aposta = 1;
+const apostaEl = document.getElementById("aposta");
+
 const saldoEl = document.getElementById("saldo");
 const msg = document.getElementById("msg");
 const r1 = document.getElementById("r1");
@@ -22,6 +25,15 @@ onAuthStateChanged(auth, async user => {
   const snap = await getDoc(doc(db, "usuarios", uid));
   saldoEl.innerText = snap.data().credito;
 });
+window.alterarAposta = (valor) => {
+  aposta += valor;
+
+ if (saldo < aposta)
+  msg.innerText = "❌ Saldo insuficiente";
+  btn.disabled = false;
+  return;
+
+};
 
 window.jogar = async () => {
   btn.disabled = true;
@@ -44,11 +56,15 @@ window.jogar = async () => {
     r3.innerText = s3;
 
     const ref = doc(db, "usuarios", uid);
-    await updateDoc(ref, { credito: increment(-1) });
+    await updateDoc(ref, { credito: increment(-aposta) });
 
     if (s1 === s2 || s2 === s3 || s1 === s3) {
-      await updateDoc(ref, { credito: increment(2) });
-      msg.innerText = "🎉 GANHOU +2!";
+      const ganho = aposta * 2;
+      await updateDoc(ref, { credito: increment(ganho) });
+
+      msg.innerText = `🎉 VOCÊ GANHOU +${ganho}!`;
+      msg.classList.add("win");
+      
       if (s1 === s2) { r1.classList.add("win-slot"); r2.classList.add("win-slot"); }
       if (s2 === s3) { r2.classList.add("win-slot"); r3.classList.add("win-slot"); }
       if (s1 === s3) { r1.classList.add("win-slot"); r3.classList.add("win-slot"); }
