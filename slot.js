@@ -7,6 +7,9 @@ import {
   doc, getDoc, updateDoc, increment
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+console.log("UID:", uid);
+console.log("Saldo:", snap.data()?.credito);
+
 const saldoEl = document.getElementById("saldo");
 const msg = document.getElementById("msg");
 
