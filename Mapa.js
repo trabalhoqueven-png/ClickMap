@@ -1,13 +1,17 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore,
   doc,
   getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+} 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   getAuth,
+  signOut,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC5TlYdXT6Y0keGZY_DVXPeE9Ru4NqhHzY",
@@ -22,11 +26,16 @@ const auth = getAuth(app);
 updateDoc(doc(db, "users", uid), {
   credits: increment(qtd)
 });
-
+//  CARREGAMENTO DE SALDO
 onAuthStateChanged(auth, async user => {
   if (!user) return location.href = "index.html";
 
   const snap = await getDoc(doc(db, "users", user.uid));
   document.getElementById("saldo").innerText =
     snap.data().credits + " créditos";
+});
+// 🚪 BOTÃO SAIR
+document.getElementById("btnSair").addEventListener("click", async () => {
+  await signOut(auth);
+  location.href = "index.html";
 });
