@@ -1,3 +1,4 @@
+import { auth, db } from "./firebase.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
@@ -16,29 +17,27 @@ const firebaseConfig = {
   projectId: "clickmap-ae0ca"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
 onAuthStateChanged(auth, async user => {
-  if (!user) return location.href = "index.html";
+  if (!user) {
+    location.replace("index.html");
+    return;
+  }
 
-  const snap = await getDoc(doc(db, "users", user.uid));
-  const credits = snap.exists() ? (snap.data().credits ?? 0) : 0;
+  const snap = await getDoc(doc(db, "usuarios", user.uid));
+  const creditos = snap.exists() ? (snap.data().credito ?? 0) : 0;
 
   document.getElementById("saldo").innerText =
-    credits + " créditos";
+    creditos + " créditos";
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("btnSair").addEventListener("click", async () => {
-    if (!confirm("Deseja sair da conta?")) return;
-    await signOut(auth);
-    location.href = "index.html";
-  });
-});
+document.getElementById("btnSair").onclick = async () => {
+  if (!confirm("Deseja sair da conta?")) return;
+  await signOut(auth);
+  location.replace("index.html");
+};
 
 });
+
 
 
 
