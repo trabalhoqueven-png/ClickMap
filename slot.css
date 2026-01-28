@@ -1,9 +1,18 @@
-.slots {
+.slot {
+  width: 90px;
+  height: 90px;
+  background: #111;
+  border: 3px solid #444;
+  border-radius: 14px;
+
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin: 20px 0;
+
+  font-size: 48px;
+  transition: all 0.3s ease;
 }
+
 
 /* já melhora no mobile */
 @media (max-width: 480px) {
