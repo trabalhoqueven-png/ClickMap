@@ -1,14 +1,19 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
 import {
   getFirestore,
   doc,
   updateDoc,
-  increment
+  increment,
+  addDoc,
+  collection,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 import {
   getAuth,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"
 
 const firebaseConfig = { 
   apiKey: "AIzaSyC5TlYdXT6Y0keGZY_DVXPeE9Ru4NqhHzY",
@@ -49,6 +54,7 @@ window.comprar = async function(qtd) {
   msg.innerText =
     "📲 PIX gerado. Após o pagamento, aguarde a liberação dos créditos.";
 };
+
 
 
 
