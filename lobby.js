@@ -8,30 +8,17 @@ import {
   doc, getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+const saldoEl = document.getElementById("saldo");
+const sairBtn = document.getElementById("sair");
+
 onAuthStateChanged(auth, async user => {
-  if (!user) {
-    location.replace("index.html");
-    return;
-  }
+  if (!user) return location.href = "index.html";
 
   const snap = await getDoc(doc(db, "usuarios", user.uid));
-  const creditos = snap.exists() ? (snap.data().credito ?? 0) : 0;
-
-  document.getElementById("saldo").innerText =
-    creditos + " créditos";
+  saldoEl.innerText = snap.data().credito;
 });
 
-document.getElementById("btnSair").onclick = async () => {
-  if (!confirm("Deseja sair da conta?")) return;
+sairBtn.onclick = async () => {
   await signOut(auth);
-  location.replace("index.html");
+  location.href = "index.html";
 };
-
-});
-
-
-
-
-
-
-
