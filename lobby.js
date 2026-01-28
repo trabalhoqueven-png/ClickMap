@@ -18,7 +18,8 @@ onAuthStateChanged(auth, async user => {
   saldoEl.innerText = snap.data().credito;
 });
 
-sairBtn.onclick = async () => {
+sair.onclick = async () => {
   await signOut(auth);
   location.href = "index.html";
 };
+
