@@ -1,32 +1,26 @@
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getFirestore,
-  doc,
-  getDoc
-} 
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
   signOut,
   onAuthStateChanged
-} 
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC5TlYdXT6Y0keGZY_DVXPeE9Ru4NqhHzY",
-  authDomain: "qcassino-227ab.firebaseapp.com",
-  projectId: "qcassino-227ab"
+  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
+  authDomain: "clickmap-ae0ca.firebaseapp.com",
+  projectId: "clickmap-ae0ca"
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-updateDoc(doc(db, "users", uid), {
-  credits: increment(qtd)
-});
-//  CARREGAMENTO DE SALDO
+// 🔐 Protege o lobby + carrega saldo
 onAuthStateChanged(auth, async user => {
   if (!user) return location.href = "index.html";
 
@@ -34,6 +28,7 @@ onAuthStateChanged(auth, async user => {
   document.getElementById("saldo").innerText =
     snap.data().credits + " créditos";
 });
+
 // 🚪 BOTÃO SAIR
 document.getElementById("btnSair").addEventListener("click", async () => {
   await signOut(auth);
