@@ -1,21 +1,12 @@
 import { auth, db } from "./firebase.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
-  getAuth,
-  signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
-  authDomain: "clickmap-ae0ca.firebaseapp.com",
-  projectId: "clickmap-ae0ca"
-};
+import {
+  doc, getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 onAuthStateChanged(auth, async user => {
   if (!user) {
@@ -37,6 +28,7 @@ document.getElementById("btnSair").onclick = async () => {
 };
 
 });
+
 
 
 
