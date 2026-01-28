@@ -111,3 +111,26 @@ body {
     background-position: top center;
   }
 }
+.bet-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 15px 0;
+}
+
+.bet-control button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  background: gold;
+  color: #000;
+  font-weight: bold;
+}
+
+.bet-control span {
+  font-size: 18px;
+  color: #fff;
+}
