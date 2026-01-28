@@ -33,15 +33,23 @@ window.comprar = async function(qtd) {
   const confirmar = confirm(
     `Confirma compra de ${qtd} créditos por PIX?`
   );
-
   if (!confirmar) return;
 
-  // 🔗 Abre o link do Mercado Pago
+  // 🔥 REGISTRA PEDIDO
+  await addDoc(collection(db, "compras"), {
+    uid: usuarioAtual.uid,
+    quantidade: qtd,
+    status: "pendente",
+    data: serverTimestamp()
+  });
+
+  // 🔗 PIX
   window.open("https://mpago.la/12KQxs2", "_blank");
 
-  document.getElementById("msg").innerText =
-    "📲 Faça o pagamento via PIX. Após pagar, seus créditos serão liberados.";
+  msg.innerText =
+    "📲 PIX gerado. Após o pagamento, aguarde a liberação dos créditos.";
 };
+
 
 
 
