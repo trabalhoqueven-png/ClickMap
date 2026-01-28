@@ -22,4 +22,8 @@ sair.onclick = async () => {
   await signOut(auth);
   location.href = "index.html";
 };
+history.pushState(null, "", location.href);
+window.onpopstate = () => {
+  history.pushState(null, "", location.href);
+};
 
