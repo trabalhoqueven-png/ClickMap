@@ -1,95 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#b30000">
-  <link rel="stylesheet" href="stylesmapa.css">
-
+  <title>Casino Lobby</title>
+  <link rel="stylesheet" href ="stylesmapa.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
- 
-  </button>
-  <div class="painel">
-<button id="btnMinhaLocalizacao">📍Minha localização</button>
-  <button id="btnSair">⬅ Sair</button>
-  <p class="credito-box">💰 Crédito: <span id="creditoValor">0</span></p>
-  <div class="credito-box">
-  <button id="btnCredito">➕ Adicionar crédito</button>
-</div>
-  <p>Buscar Cidade / Bairro</p>
-  <div class="input-box">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input id="buscar" placeholder="Buscar bairro ou cidade">
-</div>
 
-<button id="btnBuscar">Buscar</button>
+<header class="top-bar">
+  <div class="logo">🎰 QUEVEN CASINO</div>
+  <div class="saldo">Saldo: <span id="saldo">R$ 100,00</span></div>
+</header>
 
-  <p>Cadastrar Casa / clique no Mapa</p>
+<section class="banner">
+  <h1>Bem-vindo ao Cassino</h1>
+  <p>Aposte • Ganhe • Divirta-se</p>
+</section>
 
-<div class="input-box">
-  <i class="fa-solid fa-house"></i>
-  <input id="titulo" placeholder="Título">
-</div>
-
-<div class="input-box">
-  <i class="fa-solid fa-tag"></i>
-  <input id="preco" placeholder="Preço">
-</div>
-
-<div class="input-box">
-  <i class="fa-solid fa-pen"></i>
-  <textarea id="descricao" placeholder="Descrição"></textarea>
-</div>
-<DIV class="fotoinfo">
-  TAMANHO MAXIMO DA FOTO 400 KB !! Sé Nao da Erro.. 
-</DIV>
-
-<input type="file" id="foto">
-
-<div class="infofoto">
-  TORNAR FOTO PUBLICA? 
-</div>
-
-<label>
-  <input id="publico"  type="checkbox" >
-</label>
-
-<button id="salvar">Salvar</button>
-    
-</div>
-
-  <div class="chat-box">
-  <h3>💬 Chat Global</h3>
-
-  <div id="chatMensagens"></div>
-
-  <div class="chat-input">
-    <input id="chatTexto" placeholder="Digite sua mensagem..." maxlength="200">
-    <button id="btnEnviarChat">Enviar</button>
+<section class="games">
+  <div class="game-card">
+    <img src="https://i.imgur.com/8QZQZQZ.png" alt="Slot">
+    <h3>Slot 2x</h3>
+    <p>50% chance de vitória</p>
+    <a href="game.html">Jogar</a>
   </div>
-  
-</div>
-    
- 
-<div id="map"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <div class="game-card">
+    <img src="https://i.imgur.com/7R7R7R7.png" alt="Crash">
+    <h3>Crash</h3>
+    <p>Multiplicador em tempo real</p>
+    <button disabled>Em breve</button>
+  </div>
 
-<script type="module" src="Mapa.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js')
-    .then(() => console.log('SW registrado'))
-    .catch(err => console.error('SW erro', err));
-}
-</script>
+  <div class="game-card">
+    <img src="https://i.imgur.com/9Z9Z9Z9.png" alt="Roleta">
+    <h3>Roleta</h3>
+    <p>Clássico do cassino</p>
+    <button disabled>Em breve</button>
+  </div>
+</section>
 
+<footer class="footer">
+  <p>© 2026 Queven Casino • Jogo responsável</p>
+</footer>
 
 </body>
-
 </html>
