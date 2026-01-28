@@ -18,12 +18,13 @@ onAuthStateChanged(auth, async user => {
   saldoEl.innerText = snap.data().credito;
 });
 
-sair.onclick = async () => {
+sairBtn.onclick = async () => {
   await signOut(auth);
-  location.href = "index.html";
-};
+  location.replace("index.html");
+};;
 history.pushState(null, "", location.href);
 window.onpopstate = () => {
   history.pushState(null, "", location.href);
 };
+
 
