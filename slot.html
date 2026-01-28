@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Slot Clássico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="lobby">
+
+    <div class="top-bar">
+      <div class="logo">🎰 SLOT</div>
+      <div class="saldo">
+        Saldo: <span id="saldo">0</span>
+      </div>
+      <button onclick="voltar()">Voltar</button>
+    </div>
+
+    <div class="banner">
+      <h1>Slot Clássico</h1>
+      <p>Aposta: 1 crédito</p>
+    </div>
+
+    <div class="games">
+
+      <div class="game-card">
+        <div style="font-size:40px" id="r1">🍒</div>
+      </div>
+
+      <div class="game-card">
+        <div style="font-size:40px" id="r2">🍋</div>
+      </div>
+
+      <div class="game-card">
+        <div style="font-size:40px" id="r3">🔔</div>
+      </div>
+
+    </div>
+
+    <button style="margin-top:20px" onclick="jogar()">
+      🎲 GIRAR
+    </button>
+
+    <p id="msg" style="margin-top:15px;text-align:center"></p>
+
+  </div>
+
+  <script type="module" src="slot.js"></script>
+</body>
+</html>
