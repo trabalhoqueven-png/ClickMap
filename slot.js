@@ -21,8 +21,15 @@ onAuthStateChanged(auth, async user => {
   if (!user) return location.replace("index.html");
 
   uid = user.uid;
-  const snap = await getDoc(doc(db, "usuarios", uid));
-  saldoEl.innerText = snap.data().credito;
+  const ref = doc(db, "usuarios", uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) {
+    await setDoc(ref, { credito: 10 });
+    saldoEl.innerText = 10;
+  } else {
+    saldoEl.innerText = snap.data().credito;
+  }
 });
 
 window.jogar = async () => {
