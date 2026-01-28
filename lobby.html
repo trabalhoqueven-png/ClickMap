@@ -1,17 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<link rel="stylesheet" href="styles.css">
 <head>
   <meta charset="UTF-8">
   <title>QCasino - Lobby</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
 </head>
-  <button id="sair">Sair</button>
+
 <body>
   <div class="lobby">
-   <h2>🎰 QCASINO</h2>
-    <p>Saldo: <span id="saldo">0</span></p>
-    
-  </div>
-</body>
 
+    <!-- TOPO -->
+    <div class="top-bar">
+      <div class="logo">🎰 QCASINO</div>
+      <div class="saldo">
+        Saldo: <span id="saldo">0</span>
+      </div>
+      <button id="sair">Sair</button>
+    </div>
+
+    <!-- BANNER -->
+    <div class="banner">
+      <h1>Bem-vindo ao Cassino</h1>
+      <p>Escolha seu jogo e aposte</p>
+    </div>
+
+    <!-- JOGOS -->
+    <div class="games">
+
+      <!-- JOGO 1 -->
+      <div class="game-card">
+        <h3>🎰 Slot Clássico</h3>
+        <p>Ganhe até 2x</p>
+        <button>Jogar</button>
+      </div>
+
+      <!-- JOGO 2 -->
+      <div class="game-card">
+        <h3>💥 Crash</h3>
+        <p>Multiplicador cresce</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 3 -->
+      <div class="game-card">
+        <h3>🎯 Double</h3>
+        <p>50% chance</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 4 -->
+      <div class="game-card">
+        <h3>🎡 Roleta</h3>
+        <p>Números clássicos</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 5 -->
+      <div class="game-card">
+        <h3>🃏 Blackjack</h3>
+        <p>21 pontos</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 6 -->
+      <div class="game-card">
+        <h3>🪙 Cara ou Coroa</h3>
+        <p>Dobro ou nada</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 7 -->
+      <div class="game-card">
+        <h3>🎲 Dados</h3>
+        <p>Sorte nos dados</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 8 -->
+      <div class="game-card">
+        <h3>📈 Mines</h3>
+        <p>Evite as bombas</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 9 -->
+      <div class="game-card">
+        <h3>⚡ Fortune</h3>
+        <p>Multiplicador rápido</p>
+        <button disabled>Em breve</button>
+      </div>
+
+      <!-- JOGO 10 -->
+      <div class="game-card">
+        <h3>🎁 Caixa Surpresa</h3>
+        <p>Prêmios aleatórios</p>
+        <button disabled>Em breve</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="lobby.js"></script>
+</body>
 </html>
