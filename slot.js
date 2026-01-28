@@ -27,7 +27,13 @@ onAuthStateChanged(auth, async user => {
 
 window.jogar = async () => {
   if (!uid) return;
+  
+  msg.innerText = "";
+  msg.className = "";
 
+  const btn = document.getElementById("btnSpin");
+  btn.disabled = true;
+  
   const ref = doc(db, "usuarios", uid);
   const snap = await getDoc(ref);
   let saldo = snap.data().credito;
@@ -36,12 +42,25 @@ window.jogar = async () => {
     msg.innerText = "❌ Saldo insuficiente";
     return;
   }
-
+  
+  // inicia animação
+  r1.classList.add("girando");
+  r2.classList.add("girando");
+  r3.classList.add("girando");
+  
   // 🎲 sorteio
+  const simbolos = ["🍒","🍋","🔔","⭐","💎"];
+
   const s1 = simbolos[Math.floor(Math.random()*simbolos.length)];
   const s2 = simbolos[Math.floor(Math.random()*simbolos.length)];
   const s3 = simbolos[Math.floor(Math.random()*simbolos.length)];
-
+  
+  // espera 1 segundo (efeito giro)
+  setTimeout(async () => {
+   r1.classList.remove("girando");
+   r2.classList.remove("girando");
+   r3.classList.remove("girando");
+  
   r1.innerText = s1;
   r2.innerText = s2;
   r3.innerText = s3;
@@ -53,8 +72,10 @@ window.jogar = async () => {
   if (s1 === s2 || s2 === s3 || s1 === s3) {
     await updateDoc(ref, { credito: increment(2) });
     msg.innerText = "🎉 VOCÊ GANHOU +2!";
+    msg.classList.add("win");
   } else {
     msg.innerText = "😢 Não foi dessa vez";
+    msg.classList.add("lose");
   }
 
   const novoSnap = await getDoc(ref);
