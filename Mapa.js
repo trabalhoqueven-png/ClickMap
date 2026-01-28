@@ -26,7 +26,7 @@ onAuthStateChanged(auth, async user => {
 
   const snap = await getDoc(doc(db, "users", user.uid));
   document.getElementById("saldo").innerText =
-    snap.data().credits + " créditos";
+   (snap.data().credits ?? 0) + " créditos";
 });
 
 // 🚪 BOTÃO SAIR
@@ -36,5 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     location.href = "index.html";
   });
 });
+
 
 
