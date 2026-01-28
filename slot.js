@@ -6,7 +6,7 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-let aposta = 1;
+let aposta = 2;
 const apostaEl = document.getElementById("apostaValor");
 
 const saldoEl = document.getElementById("saldo");
