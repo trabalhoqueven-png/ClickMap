@@ -30,7 +30,11 @@ onAuthStateChanged(auth, async user => {
 });
 
 // 🚪 BOTÃO SAIR
-document.getElementById("btnSair").addEventListener("click", async () => {
-  await signOut(auth);
-  location.href = "index.html";
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btnSair").addEventListener("click", async () => {
+    await signOut(auth);
+    location.href = "index.html";
+  });
 });
+
+
